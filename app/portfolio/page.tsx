@@ -7,47 +7,47 @@ import { Button } from '@/components/ui/button';
 
 const projects = [
   {
-    name: 'HealthTrack Pro',
-    tagline: 'Healthcare Management Platform',
-    problem: 'Hospital needed a unified system for patient records, appointments, and billing',
-    solution: 'Built a comprehensive cloud-based platform with role-based access and real-time updates',
-    result: '50% reduction in administrative time, improved patient satisfaction scores by 35%',
-    tech: ['React', 'Node.js', 'PostgreSQL', 'AWS', 'WebSocket'],
+    name: 'Shreya Motors App',
+    tagline: 'Electric vehicle management platform',
+    problem: 'Application required to manage electric vehicles and their rental assignments',
+    solution: 'Built a comprehensive application with real time location updates, batteries and charging management',
+    result: '80% improvement in logistics, 50% improved charging and battery management, new implementation of database',
+    tech: ['Bubble.io'],
     testimonial: '"Nirmaan transformed our operations. The platform is intuitive and reliable." - Dr. Sarah Johnson, CTO',
     link: '#',
     github: '#'
   },
   {
-    name: 'FinFlow',
-    tagline: 'Investment Portfolio Manager',
-    problem: 'Financial advisors lacked tools to manage client portfolios efficiently',
-    solution: 'Developed a real-time portfolio tracking system with AI-powered insights',
-    result: '$100M+ in assets under management, 10K+ active users',
+    name: 'Ajinkya Social Foundation',
+    tagline: 'Non-Profit Organization website',
+    problem: 'Required website to improve reach and simplify donation process',
+    solution: 'Developed a dynamic website having integrated payment gateway along with CMS and CRUD functionalities',
+    result: 'Information about the NGO became accessible, improved donation frequency by 70%, simplified donation process significantly',
     tech: ['Next.js', 'Python', 'TensorFlow', 'PostgreSQL', 'Redis'],
     testimonial: '"The AI recommendations have been incredibly accurate." - Michael Chen, VP of Technology',
-    link: '#',
-    github: '#'
+    link: 'https://ajinkyasocialfoundation.org',
+    github: 'https://github.com/MeetMavani/AJFO'
   },
   {
-    name: 'EduLearn',
-    tagline: 'Online Learning Platform',
-    problem: 'Educational institute needed a scalable platform for remote learning',
-    solution: 'Created an interactive platform with video streaming, live classes, and progress tracking',
-    result: '100K+ students enrolled, 95% completion rate',
+    name: 'Zenova',
+    tagline: 'GSAP Showcase',
+    problem: 'Needed a showcase for GSAP and Framer Motion abilities of the team',
+    solution: 'Created a scroll controlled website with smooth animations and responsive UI',
+    result: 'Displayed animation skills of the team',
     tech: ['Vue', 'Django', 'MongoDB', 'WebRTC', 'AWS S3'],
     testimonial: '"Student engagement has never been higher." - Prof. Anita Kumar, Director',
-    link: '#',
-    github: '#'
+    link: 'https://zenova-nine.vercel.app/',
+    github: 'https://github.com/MeetMavani/Zenova'
   },
   {
-    name: 'ShopSmart',
-    tagline: 'E-commerce Platform',
-    problem: 'Retail business struggling with outdated e-commerce infrastructure',
-    solution: 'Built a modern, mobile-first platform with personalized recommendations',
-    result: '200% increase in online sales, 45% boost in mobile conversions',
+    name: 'WeConnect Overseas',
+    tagline: 'Educational support platform',
+    problem: 'WeConnect Oversease needed a complete overhaul of their homepage',
+    solution: 'Built a modern, elegant and catchy homepage with smooth minimalist animations and pleasing UI',
+    result: 'Improvement in establishing trust in students',
     tech: ['React Native', 'Node.js', 'Stripe', 'Elasticsearch', 'Docker'],
     testimonial: '"Our online revenue has tripled since launch." - Priya Sharma, CEO',
-    link: '#',
+    link: 'https://www.weconnectoverseas.info',
     github: '#'
   }
 ];
@@ -116,7 +116,7 @@ const Portfolio = () => {
                           <p className="text-muted-foreground font-medium">{project.result}</p>
                         </div>
 
-                        <div>
+                        {/* <div>
                           <h4 className="font-semibold text-sm mb-3">Tech Stack</h4>
                           <div className="flex flex-wrap gap-2">
                             {project.tech.map((tech) => (
@@ -128,12 +128,12 @@ const Portfolio = () => {
                               </span>
                             ))}
                           </div>
-                        </div>
+                        </div> */}
 
                         <div className="pt-4 border-t border-border">
-                          <p className="text-sm italic text-muted-foreground mb-4">
+                          {/* <p className="text-sm italic text-muted-foreground mb-4">
                             {project.testimonial}
-                          </p>
+                          </p> */}
                           <div className="flex gap-3">
                             <Button size="sm" variant="default">
                               <ExternalLink className="mr-2 h-4 w-4" />
