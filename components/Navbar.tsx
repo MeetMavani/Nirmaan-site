@@ -43,6 +43,7 @@ export const Navbar = () => {
           <Link href="/" className="text-2xl font-bold">
             <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
               {themeConfig.company.name}
+              {/* <Image src={themeConfig.company.logo} alt={themeConfig.company.name} width={200} height={200} /> */}
             </span>
           </Link>
 
@@ -68,7 +69,7 @@ export const Navbar = () => {
             ))}
             <Link href="/contact">
               <Button variant="default" size="sm">
-                Get Started
+                Get In Touch
               </Button>
             </Link>
           </div>
@@ -107,7 +108,7 @@ export const Navbar = () => {
             ))}
             <Link href="/contact" onClick={() => setIsOpen(false)}>
               <Button variant="default" className="w-full mt-4">
-                Get Started
+                Get In Touch
               </Button>
             </Link>
           </motion.div>

@@ -17,6 +17,10 @@
 /.next/
 /out/
 
+# RHDA - ignore build artifacts
+.next/
+.next/**
+
 # production
 /build
 

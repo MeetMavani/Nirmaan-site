@@ -58,37 +58,37 @@
   }
 
   .dark {
-    --background: 123 30% 8%;
-    --foreground: 123 35% 96%;
+    --background: 210 30% 8%; /* Dark blue background */
+    --foreground: 210 20% 90%; /* Light blue text */
 
-    --card: 123 25% 12%;
-    --card-foreground: 123 35% 96%;
+    --card: 210 25% 12%; /* Dark blue card */
+    --card-foreground: 210 20% 90%;
 
-    --popover: 123 25% 12%;
-    --popover-foreground: 123 35% 96%;
+    --popover: 210 25% 12%;
+    --popover-foreground: 210 20% 90%;
 
-    --primary: 122 39% 60%;
-    --primary-foreground: 123 60% 15%;
+    --primary: 210 70% 60%; /* Brighter blue for dark mode */
+    --primary-foreground: 210 30% 8%;
 
-    --secondary: 123 25% 18%;
-    --secondary-foreground: 123 35% 96%;
+    --secondary: 90 20% 25%; /* Dark sage green */
+    --secondary-foreground: 210 20% 90%;
 
-    --muted: 123 25% 18%;
-    --muted-foreground: 122 20% 65%;
+    --muted: 210 25% 18%; /* Dark muted */
+    --muted-foreground: 210 15% 60%;
 
-    --accent: 123 25% 22%;
-    --accent-foreground: 122 39% 60%;
+    --accent: 35 20% 40%; /* Dark taupe */
+    --accent-foreground: 210 20% 90%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 123 35% 96%;
+    --destructive-foreground: 210 20% 90%;
 
-    --border: 123 25% 18%;
-    --input: 123 25% 18%;
-    --ring: 122 39% 60%;
+    --border: 210 25% 18%;
+    --input: 210 25% 18%;
+    --ring: 210 70% 60%;
     
-    --gradient-primary: linear-gradient(135deg, hsl(123 30% 8%) 0%, hsl(123 35% 15%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(122 39% 49%) 0%, hsl(122 39% 60%) 100%);
-    --gradient-subtle: linear-gradient(180deg, hsl(123 30% 8%) 0%, hsl(123 25% 12%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(210 30% 8%) 0%, hsl(210 25% 15%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(90 20% 25%) 0%, hsl(35 20% 40%) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(210 30% 8%) 0%, hsl(210 25% 12%) 100%);
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;

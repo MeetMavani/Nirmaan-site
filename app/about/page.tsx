@@ -28,10 +28,10 @@ const values = [
 ];
 
 const team = [
-  { name: 'Raj Kumar', role: 'Founder & CEO', expertise: 'Full-Stack Architecture' },
-  { name: 'Priya Sharma', role: 'CTO', expertise: 'Cloud & DevOps' },
-  { name: 'Amit Patel', role: 'Lead Frontend', expertise: 'React & UX' },
-  { name: 'Sneha Reddy', role: 'Lead Backend', expertise: 'Node.js & Python' },
+  { name: 'Kashyap Mavani', role: 'Founder & CEO', expertise: 'Full-Stack Architecture' },
+  { name: 'Disha Raskar', role: 'CTO', expertise: 'Cloud & DevOps' },
+  { name: 'Shubhankar Patil', role: 'Lead Frontend', expertise: 'React & UX' },
+  { name: 'Meet Mavani', role: 'Lead Backend', expertise: 'Node.js & Python' },
 ];
 
 const About = () => {
