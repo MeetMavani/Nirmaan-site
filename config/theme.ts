@@ -24,9 +24,10 @@ export const themeConfig = {
   // Company Info
   company: {
     name: 'Nirmaan',
+    logo: '/assets/NirmaanLogo-BgRemoved.png',
     tagline: 'Building Tomorrow\'s Software Today',
-    email: 'hello@nirmaan.dev',
-    phone: '+1 (555) 123-4567',
+    email: 'nirmaan.devv@gmail.com',
+    phone: '+91 9850015522',
     social: {
       linkedin: 'https://linkedin.com/company/nirmaan',
       github: 'https://github.com/nirmaan',

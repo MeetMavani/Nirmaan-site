@@ -25,7 +25,7 @@ const contactInfo = [
   {
     icon: MapPin,
     label: 'Location',
-    value: 'San Francisco, CA',
+    value: 'Pune, Maharashtra',
     link: '#'
   }
 ];
@@ -53,7 +53,7 @@ const Contact = () => {
           >
             <h1 className="text-5xl md:text-6xl font-bold mb-6">Get In Touch</h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Let's discuss your project and see how we can help
+              Let&apos;s discuss your project and see how we can help
             </p>
           </motion.div>
         </div>
@@ -71,7 +71,7 @@ const Contact = () => {
             >
               <h2 className="text-3xl font-bold mb-6">Contact Information</h2>
               <p className="text-muted-foreground mb-8">
-                Have a question or ready to start your project? We're here to help. 
+                Have a question or ready to start your project? We&apos;re here to help. 
                 Reach out through any of these channels or fill out the form.
               </p>
 
@@ -96,9 +96,9 @@ const Contact = () => {
                 ))}
               </div>
 
-              <Card className="p-6 bg-gradient-accent text-white">
+              <Card className="p-6 bg-gradient-accent text-muted-foreground">
                 <h3 className="text-xl font-bold mb-2">Quick Response Time</h3>
-                <p className="text-white/90">
+                <p className="text-muted-foreground">
                   We typically respond to all inquiries within 24 hours during business days.
                 </p>
               </Card>
@@ -181,12 +181,12 @@ const Contact = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl font-bold mb-6">Prefer to Schedule a Call?</h2>
-            <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+            <h2 className="text-4xl text-primary font-bold mb-6">Prefer to Schedule a Call?</h2>
+            <p className="text-xl text-primary mb-8 opacity-90 max-w-2xl mx-auto">
               Book a free 30-minute consultation to discuss your project
             </p>
             <a href="#" target="_blank" rel="noopener noreferrer">
-              <button className="px-8 py-4 bg-background text-foreground rounded-lg font-semibold hover:scale-105 transition-transform">
+              <button className="px-8 py-4 bg-background text-foreground rounded-full border border-primary font-semibold hover:scale-105 transition-transform">
                 Schedule a Call
               </button>
             </a>

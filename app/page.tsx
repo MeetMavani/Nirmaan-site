@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { HeroBackground } from '@/components/HeroBackground';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import heroBg from '@/public/assets/hero-bg.jpg';
+// import heroBg from '@/public/assets/hero-bg.jpg';
 
 const stats = [
   { icon: Trophy, label: 'Years Experience', value: '10+' },
@@ -93,7 +93,7 @@ const Home = () => {
             viewport={{ once: true }}
             className="max-w-4xl mx-auto text-center"
           >
-            <h2 className="text-4xl font-bold mb-6">Who We Are</h2>
+            <h2 className="text-4xl font-bold mb-6">Who Are We</h2>
             <p className="text-lg text-muted-foreground mb-8">
               Nirmaan is a full-service software development agency specializing in building 
               cutting-edge web and mobile applications. We combine technical excellence with 
