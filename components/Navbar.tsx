@@ -34,7 +34,9 @@ export const Navbar = () => {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-card/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
+        scrolled 
+          ? 'bg-white/10 backdrop-blur-md shadow-lg border-b border-white/20' 
+          : 'bg-white/5 backdrop-blur-sm border-b border-white/10'
       }`}
     >
       <div className="container mx-auto px-4">
@@ -90,7 +92,7 @@ export const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden pb-4"
+            className="md:hidden pb-4 backdrop-blur-md bg-white/10 border-t border-white/20 mt-4"
           >
             {navLinks.map((link) => (
               <Link

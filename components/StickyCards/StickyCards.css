@@ -49,7 +49,23 @@
 }
 
 .sticky-card-header {
-    width: 75%;
+    width: 98%;
+    letter-spacing: normal;
+    line-height: 1.2;
+}
+
+.sticky-card-header h1 {
+    letter-spacing: normal;
+    line-height: 1.2;
+}
+
+.sticky-card-index h1 {
+    letter-spacing: normal;
+}
+
+.sticky-card-copy-description p {
+    letter-spacing: normal;
+    line-height: 1.6;
 }
 
 .sticky-card-img img {

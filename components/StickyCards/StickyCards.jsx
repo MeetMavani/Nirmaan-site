@@ -9,9 +9,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 
-const StickyCards = () => {
+const StickyCards = ({ projects }) => {
 
-    const stickyCardsData = [
+    const stickyCardsData = projects || [
         {
           index: "01",
           title: "Fast Performance",
