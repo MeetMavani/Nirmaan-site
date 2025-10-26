@@ -26,7 +26,7 @@ export const themeConfig = {
     name: 'Nirmaan',
     logo: '/assets/NirmaanLogo-BgRemoved.png',
     tagline: 'Building Tomorrow\'s Software Today',
-    email: 'nirmaan.devv@gmail.com',
+    email: 'nirmaan.create@gmail.com',
     phone: '+91 9850015522',
     social: {
       linkedin: 'https://linkedin.com/company/nirmaan',
