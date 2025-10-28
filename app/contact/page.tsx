@@ -1,7 +1,10 @@
+// Save this file as: Contact.tsx or page.tsx
+// This is a TypeScript React component (.tsx)
+
 "use client";
 
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, MessageCircle } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -9,7 +12,14 @@ import { Textarea } from '@/components/ui/textarea';
 import { themeConfig } from '@/config/theme';
 import { useToast } from '@/hooks/use-toast';
 
-const contactInfo = [
+interface ContactInfo {
+  icon: React.ComponentType<{ className?: string }>;
+  label: string;
+  value: string;
+  link: string;
+}
+
+const contactInfo: ContactInfo[] = [
   {
     icon: Mail,
     label: 'Email',
@@ -23,6 +33,12 @@ const contactInfo = [
     link: `tel:${themeConfig.company.phone}`
   },
   {
+    icon: MessageCircle,
+    label: 'WhatsApp',
+    value: themeConfig.company.phone,
+    link: `https://wa.me/919284162482?text=Hi%20Nirmaan!%20I%20came%20across%20your%20website%20and%20would%20like%20to%20connect.`
+  },
+  {
     icon: MapPin,
     label: 'Location',
     value: 'Pune, Maharashtra',
@@ -30,7 +46,7 @@ const contactInfo = [
   }
 ];
 
-const Contact = () => {
+const Contact: React.FC = () => {
   const { toast } = useToast();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -80,6 +96,8 @@ const Contact = () => {
                   <motion.a
                     key={info.label}
                     href={info.link}
+                    target={info.label === 'WhatsApp' || info.label === 'Email' ? '_blank' : undefined}
+                    rel={info.label === 'WhatsApp' || info.label === 'Email' ? 'noopener noreferrer' : undefined}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
