@@ -50,7 +50,7 @@ const Technologies = () => {
   }));
 
   return (
-    <>
+    <div className="portfolio-page">
       <ReactLenis root/>
       <section className="intro bg-[#1a1a1a] text-[#edf1e8]">
         <h1>The Projects</h1>
@@ -61,7 +61,7 @@ const Technologies = () => {
       <section className="outro bg-[#1a1a1a] text-[#edf1e8]">
         <h1>More Projects in Progress</h1>
       </section>
-    </>
+    </div>
   );
 };
   
