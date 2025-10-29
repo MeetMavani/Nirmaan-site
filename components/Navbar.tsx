@@ -16,6 +16,7 @@ const navLinks = [
   { name: 'Clients', path: '/clients' },
   { name: 'Technologies', path: '/technologies' },
   { name: 'Contact', path: '/contact' },
+  { name: 'Create', path: '/create' },
 ];
 
 export const Navbar = () => {

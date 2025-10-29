@@ -53,13 +53,13 @@ const Technologies = () => {
     <div className="portfolio-page">
       <ReactLenis root/>
       <section className="intro bg-[#1a1a1a] text-[#edf1e8]">
-        <h1>The Projects</h1>
+        <h1 className="portfolio-page-title-intro">Our Projects</h1>
       </section>
 
       <StickyCards projects={stickyCardsData} />
 
       <section className="outro bg-[#1a1a1a] text-[#edf1e8]">
-        <h1>More Projects in Progress</h1>
+        <h1 className="portfolio-page-title-outro">More Projects in Progress</h1>
       </section>
     </div>
   );

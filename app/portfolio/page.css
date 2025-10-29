@@ -4,6 +4,13 @@
     box-sizing: border-box;
 }
 
+.portfolio-page {
+    /* Global letter-spacing for the portfolio page */
+    letter-spacing: var(--portfolio-letter-spacing, 0.01em);
+    /* Mobile/compact default */
+    --portfolio-letter-spacing-sm: 0.008em;
+}
+
 .portfolio-page img {
     height: 100%;
     width: 100%;
@@ -13,13 +20,35 @@
 .portfolio-page h1 {
     font-size: 4.2rem;
     font-weight: 800;
-    letter-spacing: -0.35rem;
+    letter-spacing: var(--portfolio-letter-spacing, 0.01em);
     line-height: 1.1;
 }
 
+/* Increase specificity so it beats .portfolio-page h1 */
+h1.portfolio-page-title-intro {
+    /* Responsive title size for portfolio hero/outro headings */
+    font-size: clamp(2.5rem, 12vw, 15rem);
+    font-weight: 800;
+    letter-spacing: var(--portfolio-letter-spacing, 0.01em);
+    line-height: 1.1;
+}
+h1.portfolio-page-title-outro {
+    /* Responsive title size for portfolio hero/outro headings */
+    font-size: clamp(2.5rem, 8vw, 12rem);
+    font-weight: 800;
+    letter-spacing: var(--portfolio-letter-spacing, 0.01em);
+    line-height: 1.1;
+}
+
+/* Make StickyCards card titles responsive within the portfolio page */
+.portfolio-page .sticky-card-header {
+    font-size: clamp(1.5rem, 5vw, 3rem);
+}
+
 .portfolio-page p {
-    font-size: 1.125rem;
+    font-size: 1.5rem;
     font-weight: 500;
+    letter-spacing: var(--portfolio-letter-spacing, 0.01em);
 }
 
 .portfolio-page section {
@@ -34,13 +63,30 @@
     text-align: center;
 }
 
+/* Ensure StickyCards text inherits the portfolio page letter-spacing */
+.portfolio-page .sticky-card-header h1,
+.portfolio-page .sticky-card-index h1,
+.portfolio-page .sticky-card-copy-description p,
+.portfolio-page .sticky-card-copy-title p {
+    letter-spacing: inherit;
+}
+
 @media (max-width: 1000px) {
     .portfolio-page h1 {
         font-size: 2rem;
-        letter-spacing: 0;
+        letter-spacing: var(--portfolio-letter-spacing-sm, 0.02em);
+    }
+
+    /* Ensure title still scales on mobile */
+    h1.portfolio-page-title-intro {
+        font-size: clamp(2rem, 10vw, 4rem);
+    }
+    h1.portfolio-page-title-outro {
+        font-size: clamp(2rem, 10vw, 4rem);
     }
 
     .portfolio-page p {
         font-size: 1rem;
+        letter-spacing: var(--portfolio-letter-spacing-sm, 0.02em);
     }
 }

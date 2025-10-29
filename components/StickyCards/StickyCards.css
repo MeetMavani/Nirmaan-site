@@ -33,7 +33,8 @@
 }
 
 .sticky-card-index {
-    flex: 2;
+    flex: 1.5;
+    transform: translateX(calc(0.5 * clamp(0.5rem, 2vw, 2rem)));
 }
 
 .sticky-card-content {
@@ -55,7 +56,6 @@
 }
 
 .sticky-card-header h1 {
-    letter-spacing: normal;
     line-height: 1.2;
 }
 
@@ -106,7 +106,35 @@
     }
 
     .sticky-card-index {
-        flex: 1;
+        flex: 0.4;
+        transform: translateX(0);
+    }
+
+    /* Side padding for inner content on small screens */
+    .sticky-card-content-wrapper {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+
+    /* Margins on inner elements to ensure visual breathing room */
+    .sticky-card-index h1 {
+        margin-left: 0.75rem;
+        margin-right: 0.75rem;
+    }
+
+    .sticky-card-content-wrapper h1 {
+        margin-left: 0.75rem;
+        margin-right: 0.75rem;
+    }
+
+    .sticky-card-copy-title p {
+        margin-left: 0.75rem;
+        margin-right: 0.75rem;
+    }
+
+    .sticky-card-copy-description p {
+        margin-left: 0.75rem;
+        margin-right: 0.75rem;
     }
 }
 

@@ -101,13 +101,10 @@ const StickyCards = ({ projects }) => {
                                 </div>
 
                                 <div className="sticky-card-copy">
-                                    <div className="sticky-card-copy-title">
-                                        <p>About:</p>
-                                    </div>
                                     <div className="sticky-card-copy-description">
                                         <p>{cardData.description}</p>
                                     </div>
-                                </div>
+                                </div>  
                             </div>
                         </div>
                     </div>
