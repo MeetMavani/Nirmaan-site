@@ -68,8 +68,8 @@ const Profiles = () => {
 
                 const onEnter = () => {
                     gsap.to(img, {
-                        width: 240,
-                        height: 240,
+                        width: 140,
+                        height: 140,
                         duration: 0.5,
                         ease: "power4.out"
                     });
@@ -87,8 +87,8 @@ const Profiles = () => {
 
                 const onLeave = () => {
                     gsap.to(img, {
-                        width: 150,
-                        height: 150,
+                        width: 70,
+                        height: 70,
                         duration: 0.5,
                         ease: "power4.out"
                     });
