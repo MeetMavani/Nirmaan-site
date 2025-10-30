@@ -67,11 +67,22 @@ const serviceConfigs = [
   }
 ];
 
+// Type definition for service prop
+interface ServiceConfig {
+  icon: React.ElementType;
+  title: string;
+  summary: string;
+  tools: string[];
+  example: string;
+  modelType: string;
+  hoverColor: string;
+}
+
 // ============================================
 // 3D SERVICE CARD COMPONENT
 // Handles Three.js scene setup and animations
 // ============================================
-const ServiceCard3D = ({ service, index }) => {
+const ServiceCard3D = ({ service, index }: { service: ServiceConfig; index: number }) => {
   const containerRef = useRef(null);
   const sceneRef = useRef(null);
   const cameraRef = useRef(null);
