@@ -121,20 +121,79 @@ export const TeamSection: React.FC = () => {
 
     return (
         <>
-        <section ref={sectionRef} className={`team ${barlow.className}`}>
-            <div className="profile-images">
-                <div className="img"><img src="/profiles/img1.png" alt="Kashyap"/></div>
-                <div className="img"><img src="/profiles/img2.png" alt="Disha"/></div>
-                <div className="img"><img src="/profiles/img3.png" alt="Shubhankar"/></div>
-                <div className="img"><img src="/profiles/img4.png" alt="Meet"/></div>
+        <section
+          ref={sectionRef}
+          className={`w-screen h-[90svh] bg-[#0f0f0f] text-[#e3e3e3] flex flex-col justify-center items-center gap-10 overflow-hidden relative ${barlow.className}
+            max-[900px]:flex-col-reverse`
+          }
+        >
+          <div
+            className="w-max flex justify-center items-center max-[900px]:flex-wrap max-[900px]:max-w-[90%] max-[900px]:justify-center"
+          >
+            <div
+              className="relative h-[150px] w-[150px] p-[5px] cursor-pointer will-change-[width,height] max-[900px]:h-[60px] max-[900px]:w-[60px] max-[900px]:p-[2.5px] transition-all duration-500"
+            >
+              <img
+                src="/profiles/img1.png"
+                alt="Kashyap"
+                className="h-full w-full object-cover rounded-md"
+              />
             </div>
-            <div className="profile-names">
-                <div className="name default"><h1>The Squad</h1></div>
-                <div className="name"><h1>Kashyap</h1></div>
-                <div className="name"><h1>Disha</h1></div>
-                <div className="name"><h1>Shubhankar</h1></div>
-                <div className="name"><h1>Meet</h1></div>
+            <div className="relative h-[150px] w-[150px] p-[5px] cursor-pointer will-change-[width,height] max-[900px]:h-[60px] max-[900px]:w-[60px] max-[900px]:p-[2.5px] transition-all duration-500">
+              <img src="/profiles/img2.png" alt="Disha" className="h-full w-full object-cover rounded-md" />
             </div>
+            <div className="relative h-[150px] w-[150px] p-[5px] cursor-pointer will-change-[width,height] max-[900px]:h-[60px] max-[900px]:w-[60px] max-[900px]:p-[2.5px] transition-all duration-500">
+              <img src="/profiles/img3.png" alt="Shubhankar" className="h-full w-full object-cover rounded-md" />
+            </div>
+            <div className="relative h-[150px] w-[150px] p-[5px] cursor-pointer will-change-[width,height] max-[900px]:h-[60px] max-[900px]:w-[60px] max-[900px]:p-[2.5px] transition-all duration-500">
+              <img src="/profiles/img4.png" alt="Meet" className="h-full w-full object-cover rounded-md" />
+            </div>
+          </div>
+          <div
+            className="w-full h-[20rem] overflow-hidden"
+            style={{ clipPath: 'polygon(0 0,100% 0,100% 100%,0 100%)' }}
+          >
+            <div className="name default relative">
+              <h1
+                className="absolute w-full text-center uppercase font-barlow font-black text-[20rem] tracking-[-0.5rem] leading-none text-[#e3e3db] user-select-none transform translate-y-[-100%] max-[900px]:text-[4rem] max-[900px]:tracking-[0]"
+                style={{ fontFamily: 'Barlow Condensed, sans-serif', fontWeight: 900 }}
+              >
+                The Squad
+              </h1>
+            </div>
+            <div className="name relative">
+              <h1
+                className="absolute w-full text-center uppercase font-barlow font-black text-[20rem] tracking-[-0.5rem] leading-none text-[#f93535] user-select-none transform translate-y-[100%] max-[900px]:text-[4rem] max-[900px]:tracking-[0]"
+                style={{ fontFamily: 'Barlow Condensed, sans-serif', fontWeight: 900 }}
+              >
+                Kashyap
+              </h1>
+            </div>
+            <div className="name relative">
+              <h1
+                className="absolute w-full text-center uppercase font-barlow font-black text-[20rem] tracking-[-0.5rem] leading-none text-[#f93535] user-select-none transform translate-y-[100%] max-[900px]:text-[4rem] max-[900px]:tracking-[0]"
+                style={{ fontFamily: 'Barlow Condensed, sans-serif', fontWeight: 900 }}
+              >
+                Disha
+              </h1>
+            </div>
+            <div className="name relative">
+              <h1
+                className="absolute w-full text-center uppercase font-barlow font-black text-[20rem] tracking-[-0.5rem] leading-none text-[#f93535] user-select-none transform translate-y-[100%] max-[900px]:text-[4rem] max-[900px]:tracking-[0]"
+                style={{ fontFamily: 'Barlow Condensed, sans-serif', fontWeight: 900 }}
+              >
+                Shubhankar
+              </h1>
+            </div>
+            <div className="name relative">
+              <h1
+                className="absolute w-full text-center uppercase font-barlow font-black text-[20rem] tracking-[-0.5rem] leading-none text-[#f93535] user-select-none transform translate-y-[100%] max-[900px]:text-[4rem] max-[900px]:tracking-[0]"
+                style={{ fontFamily: 'Barlow Condensed, sans-serif', fontWeight: 900 }}
+              >
+                Meet
+              </h1>
+            </div>
+          </div>
         </section>
         </>
     );
