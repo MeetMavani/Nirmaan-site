@@ -5,6 +5,7 @@ import { Code2, Smartphone, Cloud, Database, Cpu, Palette } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
+import React from 'react';
 
 // ============================================
 // 3D MODEL CONFIGURATION
@@ -67,17 +68,28 @@ const serviceConfigs = [
   }
 ];
 
+// Type definition for service prop
+interface ServiceConfig {
+  icon: React.ElementType;
+  title: string;
+  summary: string;
+  tools: string[];
+  example: string;
+  modelType: string;
+  hoverColor: string;
+}
+
 // ============================================
 // 3D SERVICE CARD COMPONENT
 // Handles Three.js scene setup and animations
 // ============================================
-const ServiceCard3D = ({ service, index }) => {
-  const containerRef = useRef(null);
-  const sceneRef = useRef(null);
-  const cameraRef = useRef(null);
-  const rendererRef = useRef(null);
-  const meshRef = useRef(null);
-  const animationRef = useRef(null);
+const ServiceCard3D = ({ service, index }: { service: ServiceConfig; index: number }) => {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const sceneRef = useRef<THREE.Scene | null>(null);
+  const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
+  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
+  const meshRef = useRef<THREE.Mesh | null>(null);
+  const animationRef = useRef<number | null>(null);
   const [isHovered, setIsHovered] = useState(false);
 
   // ============================================
@@ -86,7 +98,7 @@ const ServiceCard3D = ({ service, index }) => {
   useEffect(() => {
     if (!containerRef.current) return;
 
-    const container = containerRef.current;
+    const container = containerRef.current as HTMLDivElement;
     const width = container.clientWidth;
     const height = container.clientHeight;
 
@@ -190,8 +202,8 @@ const ServiceCard3D = ({ service, index }) => {
 
     // Handle window resize
     const handleResize = () => {
-      if (!container || !cameraRef.current || !rendererRef.current) return;
-      
+      if (!containerRef.current || !cameraRef.current || !rendererRef.current) return;
+      const container = containerRef.current as HTMLDivElement;
       const newWidth = container.clientWidth;
       const newHeight = container.clientHeight;
       
@@ -264,11 +276,11 @@ const ServiceCard3D = ({ service, index }) => {
             Always on top of 3D background
             ============================================ */}
         <div className="relative z-10">
-          <service.icon 
-            className={`w-12 h-12 mb-4 transition-colors duration-500 ${
+          {React.createElement(service.icon, {
+            className: `w-12 h-12 mb-4 transition-colors duration-500 ${
               isHovered ? 'text-white' : 'text-secondary'
-            }`}
-          />
+            }`,
+          })}
           
           <h3 
             className={`text-2xl font-bold mb-3 transition-colors duration-500 ${
