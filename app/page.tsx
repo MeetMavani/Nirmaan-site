@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Code, Users, Trophy } from 'lucide-react';
 import Link from 'next/link';
 import { HeroBackground } from '@/components/HeroBackground';
+import TeamSection from '@/components/TeamSection';
+import './team-section.css';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 // import heroBg from '@/public/assets/hero-bg.jpg';
@@ -111,6 +113,9 @@ const Home = () => {
           </motion.div>
         </div>
       </section>
+
+      {/* Team Section (formerly /create) */}
+      <TeamSection />
     </div>
   );
 };
