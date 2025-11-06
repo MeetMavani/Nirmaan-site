@@ -7,7 +7,7 @@
 .team {
     position: relative;
     width: 100vw;
-    height: 90svh;
+    height: 100svh;
     background-color: #0f0f0f;
     color: #e3e3e3;
     display: flex;
@@ -27,9 +27,10 @@
 
 .team .img {
     position: relative;
+    /* Desktop/laptop base size. Mobile is handled in the max-width:900px media query below. */
     height: 150px;
     width: 150px;
-    padding: 5px;
+    padding: 6px;
     cursor: pointer;
     will-change: width, height;
 }
@@ -74,28 +75,37 @@
 @media (max-width: 900px) {
     .team {
         flex-direction: column-reverse;
+        gap: 1.5em;
+        padding: 1rem;
     }
 
     .team .profile-images {
         flex-wrap: wrap;
         max-width: 90%;
         justify-content: center;
+        gap: 0.5rem;
     }
 
     .team .img {
         height: 60px;
         width: 60px;
         padding: 2.5px;
+        transition: none; /* Let GSAP handle animations */
     }
 
     .team .name h1 {
-        font-size: 4rem;
+        font-size: 3.8rem;
         letter-spacing: 0;
+        line-height: 1;
     }
 
     .team .profile-names {
-        height: 4rem;
+        margin-right: 20px;
+        height: 6rem;
+        min-height: 6rem;
+    }
+
+    .team .name.default h1 {
+        transform: translateY(0%);
     }
 }
-
-
