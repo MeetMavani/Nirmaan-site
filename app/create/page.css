@@ -74,26 +74,37 @@
 @media (max-width: 900px) {
     .team {
         flex-direction: column-reverse;
+        gap: 1.5em;
+        padding: 1rem;
     }
 
     .team .profile-images {
         flex-wrap: wrap;
         max-width: 90%;
         justify-content: center;
+        gap: 0.5rem;
     }
 
     .team .img {
         height: 60px;
         width: 60px;
         padding: 2.5px;
+        transition: none; /* Let GSAP handle animations */
     }
 
     .team .name h1 {
         font-size: 4rem;
         letter-spacing: 0;
+        line-height: 1;
     }
 
     .team .profile-names {
-        height: 4rem;
+        margin-right: 20px;
+        height: 6rem;
+        min-height: 6rem;
+    }
+
+    .team .name.default h1 {
+        transform: translateY(0%);
     }
 }
