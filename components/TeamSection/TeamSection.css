@@ -8,6 +8,7 @@
     position: relative;
     width: 100vw;
     height: 100svh;
+    /* background-color: #F1F8F2; */
     background-color: #0f0f0f;
     color: #e3e3e3;
     display: flex;
@@ -16,8 +17,9 @@
     align-items: center;
     gap: 2.5em;
     overflow: hidden;
+    background-image: url('/profiles/grid.png');
 }
-
+    
 .team .profile-images {
     width: max-content;
     display: flex;
@@ -56,12 +58,14 @@
     font-weight: 900;
     letter-spacing: -0.5rem;
     line-height: 1;
+    /* color: #4CAE4F; */
     color: #f93535;
     user-select: none;
     transform: translateY(100%);
 }
 
 .team .name.default h1 {
+    /* color: #6d6f6d; */
     color: #e3e3db;
     transform: translateY(-100%);
 }
