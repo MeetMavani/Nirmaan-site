@@ -353,17 +353,14 @@ const Services = () => {
   return (
     <div className="min-h-screen pt-20">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-subtle">
+      <section className="bg-gradient-subtle">
         <div className="container mx-auto px-4 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">Our Services</h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              End-to-end software development services tailored to your needs
-            </p>
+            <h1 className="text-5xl md:text-6xl font-bold">Our Services</h1>
           </motion.div>
         </div>
       </section>
@@ -376,27 +373,6 @@ const Services = () => {
               <ServiceCard3D key={service.title} service={service} index={index} />
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-primary text-primary-foreground">
-        <div className="container mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl text-primary font-bold mb-6">Ready to Start Your Project?</h2>
-            <p className="text-xl text-primary mb-8 opacity-90 max-w-2xl mx-auto">
-              Let&apos;s discuss how we can help turn your vision into reality
-            </p>
-            <a href="/contact">
-              <button className="px-8 py-4 bg-background text-foreground rounded-lg font-semibold hover:scale-105 transition-transform">
-                Get in Touch
-              </button>
-            </a>
-          </motion.div>
         </div>
       </section>
     </div>

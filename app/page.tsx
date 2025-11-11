@@ -6,6 +6,7 @@ import { ArrowRight, Target, Heart, Zap, Shield, Star, Quote } from 'lucide-reac
 import Link from 'next/link';
 import { HeroBackground } from '@/components/HeroBackground';
 import TeamSection from '@/components/TeamSection/TeamSection';
+import Services from '@/components/Services';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import gsap from 'gsap';
@@ -265,92 +266,12 @@ const Home = () => {
         </div>
       </section>
 
-      {/* 3. Team Members */}
-      <TeamSection />
+      
+      {/* 3. Services */}
+      <Services />
 
-      {/* 4. Our Values */}
-      {/* <section className="py-20 bg-card">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-4xl font-bold mb-4">Our Values</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              The principles that guide every decision we make
-            </p>
-          </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {values.map((value, index) => (
-              <motion.div
-                key={value.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Card className="p-6 h-full hover:shadow-lg transition-shadow">
-                  <value.icon className="w-12 h-12 text-secondary mb-4" />
-                  <h3 className="text-xl font-semibold mb-2">{value.title}</h3>
-                  <p className="text-muted-foreground">{value.description}</p>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section> */}
-
-      {/* 5. What Our Clients Say */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="mb-12 text-center"
-          >
-            <h2 className="text-3xl font-bold mb-4">What Our Clients Say</h2>
-            <p className="text-muted-foreground">Real feedback from real projects</p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={testimonial.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Card className="p-8 h-full hover:shadow-xl transition-shadow relative">
-                  <Quote className="absolute top-6 right-6 w-10 h-10 text-secondary/20" />
-                  
-                  <div className="flex gap-1 mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 fill-secondary text-secondary" />
-                    ))}
-                  </div>
-
-                  <p className="text-muted-foreground mb-6 italic">"{testimonial.quote}"</p>
-
-                  <div className="mt-auto">
-                    <p className="font-semibold text-lg">{testimonial.name}</p>
-                    <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                    <p className="text-sm text-secondary mt-2">
-                      Project: {testimonial.project}
-                    </p>
-                  </div>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 6. Technologies and Tools */}
+      {/* 4. Technologies and Tools */}
       <section className="py-20 bg-gradient-subtle">
         <div className="container mx-auto px-4">
           <motion.div
@@ -425,6 +346,56 @@ const Home = () => {
           </div> */}
         </div>
       </section>
+
+      {/* 5. What Our Clients Say */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="mb-12 text-center"
+          >
+            <h2 className="text-3xl font-bold mb-4">What Our Clients Say</h2>
+            <p className="text-muted-foreground">Real feedback from real projects</p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <motion.div
+                key={testimonial.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <Card className="p-8 h-full hover:shadow-xl transition-shadow relative">
+                  <Quote className="absolute top-6 right-6 w-10 h-10 text-secondary/20" />
+                  
+                  <div className="flex gap-1 mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="w-5 h-5 fill-secondary text-secondary" />
+                    ))}
+                  </div>
+
+                  <p className="text-muted-foreground mb-6 italic">"{testimonial.quote}"</p>
+
+                  <div className="mt-auto">
+                    <p className="font-semibold text-lg">{testimonial.name}</p>
+                    <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                    <p className="text-sm text-secondary mt-2">
+                      Project: {testimonial.project}
+                    </p>
+                  </div>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 6. Team Members */}
+      <TeamSection />
     </div>
   );
 };
