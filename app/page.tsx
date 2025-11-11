@@ -38,52 +38,36 @@ const values = [
 // Testimonials data
 const testimonials = [
   {
-    name: 'Sarah Johnson',
-    role: 'CTO, HealthTech Solutions',
-    company: 'HealthTech Solutions',
-    quote: 'Nirmaan delivered our healthcare platform ahead of schedule and under budget. Their attention to security and compliance was exceptional.',
+    name: 'Sachin Pawar',
+    role: 'Founder, Ajinkya Social Foundation',
+    company: 'Ajinkya Scial Foundation',
+    quote: 'Nirmaan delivered our non-profit organisation website ahead of schedule and under budget. Their attention to design, UI and compliance was exceptional.',
     rating: 5,
-    project: 'HealthTrack Pro'
+    project: 'Ajinkya Social Foundation (ajinkyasocialfoundation.org)'
   },
   {
-    name: 'Michael Chen',
-    role: 'VP of Technology, FinCorp',
-    company: 'FinCorp',
-    quote: 'The AI-powered features they built have transformed how we serve our clients. Highly recommended for fintech projects.',
+    name: 'Anonymous',
+    role: 'Design Department Head, Zenova',
+    company: 'Zenova',
+    quote: 'The animations and User Interface they developed was just what I needed. Highly recommended for your projects.',
     rating: 5,
-    project: 'FinFlow Platform'
+    project: 'Zenova (zenova-nine.vercel.app)'
   },
   {
-    name: 'Priya Sharma',
-    role: 'CEO, ShopSmart Retail',
-    company: 'ShopSmart Retail',
-    quote: 'Our online revenue tripled within 6 months of launching the new platform. The team was professional, responsive, and truly understood our business.',
+    name: 'Saurabh Gawade',
+    role: 'Founder, Shreya E-Motors App',
+    company: 'Shreya E-Motors',
+    quote: 'Our logistics improved significantly since we started using the app. The team was professional, responsive, and truly understood our business.',
     rating: 5,
-    project: 'E-commerce Platform'
+    project: 'Shreya E-Motors App'
   },
   {
-    name: 'David Kim',
-    role: 'Founder, TechStartup',
-    company: 'TechStartup',
-    quote: 'From MVP to Series A, Nirmaan has been our trusted technology partner. They scale with us and always deliver quality work.',
+    name: 'Tuba',
+    role: 'Marketing Department, WeConnect Overseas',
+    company: 'WeConnect Overseas',
+    quote: 'Our website attracted more students and worked as a means to gain trust. The team performed well and really improved the experience.',
     rating: 5,
-    project: 'SaaS Platform'
-  },
-  {
-    name: 'Anita Kumar',
-    role: 'Director, EduLearn',
-    company: 'EduLearn Institute',
-    quote: 'The online learning platform they built has enabled us to reach students globally. Student engagement has never been higher.',
-    rating: 5,
-    project: 'Learning Management System'
-  },
-  {
-    name: 'James Wilson',
-    role: 'CIO, Enterprise Corp',
-    company: 'Enterprise Corp',
-    quote: 'They successfully migrated our legacy systems to the cloud with zero downtime. Impressive technical expertise and project management.',
-    rating: 5,
-    project: 'Cloud Migration'
+    project: 'WeConnect Overseas (weconnectoverseas.info)'
   }
 ];
 
@@ -239,7 +223,7 @@ const Home = () => {
       </section>
 
       {/* 2. Who Are We */}
-      <section className="py-20">
+      <section className="">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0 }}
@@ -272,7 +256,7 @@ const Home = () => {
 
 
       {/* 4. Technologies and Tools */}
-      <section className="py-20 bg-gradient-subtle">
+      <section className="bg-gradient-subtle">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -348,7 +332,7 @@ const Home = () => {
       </section>
 
       {/* 5. What Our Clients Say */}
-      <section className="py-20">
+      <section className="">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0 }}

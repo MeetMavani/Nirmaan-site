@@ -5,6 +5,8 @@ import { Code2, Smartphone, Cloud, Database, Cpu, Palette } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
+import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import React from 'react';
 
 // ============================================
@@ -17,8 +19,8 @@ const serviceConfigs = [
     title: 'Web Development',
     summary: 'Build powerful, responsive web applications that scale with your business',
     tools: ['React', 'Next.js', 'Vue', 'TypeScript', 'Tailwind CSS'],
-    example: 'Built a real-time collaboration platform serving 50K+ users with 99.9% uptime',
-    modelType: 'torus', // Simple geometry for demo
+    // example: 'Built a real-time collaboration platform serving 50K+ users with 99.9% uptime',
+    modelPath: '/3d_models/Phone.fbx',
     hoverColor: '#10b981', // Green - CUSTOMIZE THIS
   },
   {
@@ -26,8 +28,8 @@ const serviceConfigs = [
     title: 'Mobile Development',
     summary: 'Native and cross-platform mobile apps for iOS and Android',
     tools: ['React Native', 'Flutter', 'Swift', 'Kotlin'],
-    example: 'Delivered a fintech app with biometric authentication and offline capabilities',
-    modelType: 'sphere',
+    // example: 'Delivered a fintech app with biometric authentication and offline capabilities',
+    modelPath: '/3d_models/Phone.fbx',
     hoverColor: '#3b82f6', // Blue - CUSTOMIZE THIS
   },
   {
@@ -35,8 +37,8 @@ const serviceConfigs = [
     title: 'Cloud Solutions',
     summary: 'Scalable cloud infrastructure and migration services',
     tools: ['AWS', 'GCP', 'Azure', 'Docker', 'Kubernetes'],
-    example: 'Migrated legacy monolith to microservices, reducing costs by 40%',
-    modelType: 'octahedron',
+    // example: 'Migrated legacy monolith to microservices, reducing costs by 40%',
+    modelPath: '/3d_models/Cloud_2.gltf',
     hoverColor: '#8b5cf6', // Purple - CUSTOMIZE THIS
   },
   {
@@ -44,8 +46,8 @@ const serviceConfigs = [
     title: 'Backend Development',
     summary: 'Robust APIs and server-side logic for complex business requirements',
     tools: ['Node.js', 'Python', 'PostgreSQL', 'MongoDB', 'Redis'],
-    example: 'Created high-performance API handling 10M+ requests daily',
-    modelType: 'box',
+    // example: 'Created high-performance API handling 10M+ requests daily',
+    modelPath: '/3d_models/Prop_Crate.gltf',
     hoverColor: '#f59e0b', // Orange - CUSTOMIZE THIS
   },
   {
@@ -53,8 +55,8 @@ const serviceConfigs = [
     title: 'AI Integration',
     summary: 'Integrate AI/ML capabilities into your applications',
     tools: ['TensorFlow', 'PyTorch', 'OpenAI', 'Langchain'],
-    example: 'Implemented AI chatbot reducing customer support tickets by 60%',
-    modelType: 'dodecahedron',
+    // example: 'Implemented AI chatbot reducing customer support tickets by 60%',
+    modelPath: '/3d_models/Enemy_EyeDrone.gltf',
     hoverColor: '#ec4899', // Pink - CUSTOMIZE THIS
   },
   {
@@ -62,8 +64,8 @@ const serviceConfigs = [
     title: 'UI/UX Design',
     summary: 'Beautiful, intuitive interfaces that users love',
     tools: ['Figma', 'Adobe XD', 'Framer', 'Design Systems'],
-    example: 'Redesigned e-commerce platform, increasing conversions by 35%',
-    modelType: 'torusKnot',
+    // example: 'Redesigned e-commerce platform, increasing conversions by 35%',
+    modelPath: '/3d_models/Cloud_3.gltf',
     hoverColor: '#06b6d4', // Cyan - CUSTOMIZE THIS
   }
 ];
@@ -74,8 +76,8 @@ interface ServiceConfig {
   title: string;
   summary: string;
   tools: string[];
-  example: string;
-  modelType: string;
+  // example: string;
+  modelPath: string;
   hoverColor: string;
 }
 
@@ -88,9 +90,13 @@ const ServiceCard3D = ({ service, index }: { service: ServiceConfig; index: numb
   const sceneRef = useRef<THREE.Scene | null>(null);
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
-  const meshRef = useRef<THREE.Mesh | null>(null);
+  const modelRef = useRef<THREE.Object3D | null>(null);
   const animationRef = useRef<number | null>(null);
+  const baseScaleRef = useRef<number>(1);
+  const isHoveredRef = useRef<boolean>(false);
+  const modelLoadedRef = useRef<boolean>(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [modelLoaded, setModelLoaded] = useState(false);
 
   // ============================================
   // THREE.JS SCENE INITIALIZATION
@@ -123,45 +129,107 @@ const ServiceCard3D = ({ service, index }: { service: ServiceConfig; index: numb
     rendererRef.current = renderer;
 
     // ============================================
-    // 3D MODEL CREATION
-    // Replace with GLTFLoader for custom models
+    // 3D MODEL LOADING
+    // Load FBX models from public folder
     // ============================================
-    let geometry;
-    switch (service.modelType) {
-      case 'torus':
-        geometry = new THREE.TorusGeometry(150, 60, 32, 150);
-        break;
-      case 'sphere':
-        geometry = new THREE.SphereGeometry(150, 64, 64);
-        break;
-      case 'octahedron':
-        geometry = new THREE.OctahedronGeometry(195);
-        break;
-      case 'box':
-        geometry = new THREE.BoxGeometry(225, 225, 225);
-        break;
-      case 'dodecahedron':
-        geometry = new THREE.DodecahedronGeometry(180);
-        break;
-      case 'torusKnot':
-        geometry = new THREE.TorusKnotGeometry(120, 45, 150, 32);
-        break;
-      default:
-        geometry = new THREE.TorusGeometry(150, 60, 32, 150);
-    }
+    const fbxLoader = new FBXLoader();
+    const gltfLoader = new GLTFLoader();
 
-    const material = new THREE.MeshPhongMaterial({
-      color: 0xffffff,
-      shininess: 100,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.9,
-    });
+    const loadModelByExtension = (path: string) =>
+      new Promise<THREE.Object3D>((resolve, reject) => {
+        const extension = path.split('.').pop()?.toLowerCase();
 
-    const mesh = new THREE.Mesh(geometry, material);
-    mesh.scale.set(0.01, 0.01, 0.01); // Start very small
-    scene.add(mesh);
-    meshRef.current = mesh;
+        if (extension === 'gltf' || extension === 'glb') {
+          gltfLoader.load(
+            path,
+            (gltf) => resolve(gltf.scene),
+            undefined,
+            (error) => reject(error)
+          );
+          return;
+        }
+
+        if (extension === 'fbx') {
+          fbxLoader.load(
+            path,
+            (fbx) => resolve(fbx),
+            undefined,
+            (error) => reject(error)
+          );
+          return;
+        }
+
+        reject(new Error(`Unsupported model format for path: ${path}`));
+      });
+
+    let isCancelled = false;
+
+    const applyModelToScene = (object: THREE.Object3D) => {
+      if (isCancelled) return;
+
+      // Center and scale the model
+      const box = new THREE.Box3().setFromObject(object);
+      const center = box.getCenter(new THREE.Vector3());
+      const size = box.getSize(new THREE.Vector3());
+
+      // Calculate scale to fit nicely in the scene
+      const maxDim = Math.max(size.x, size.y, size.z);
+      const scale = maxDim === 0 ? 1 : 2 / maxDim; // Scale to fit in a 2-unit space
+
+      // Store base scale for animation
+      baseScaleRef.current = scale;
+
+      // Center the model
+      object.position.sub(center);
+
+      // Apply material to all meshes in the model
+      object.traverse((child) => {
+        if (child instanceof THREE.Mesh) {
+          child.material = new THREE.MeshPhongMaterial({
+            color: 0xffffff,
+            shininess: 100,
+            transparent: true,
+            opacity: 0.9,
+            wireframe: false, // Set to true if you want wireframe
+          });
+          child.castShadow = true;
+          child.receiveShadow = true;
+        }
+      });
+
+      // Start with model very small (will be scaled up on hover)
+      object.scale.setScalar(scale * 0.01);
+      scene.add(object);
+      modelRef.current = object;
+      modelLoadedRef.current = true;
+      setModelLoaded(true);
+    };
+
+    const handleModelLoadError = (error: unknown) => {
+      if (isCancelled) return;
+
+      console.error('Error loading model:', error);
+      // Fallback to a simple geometry if model fails to load
+      const geometry = new THREE.BoxGeometry(1, 1, 1);
+      const material = new THREE.MeshPhongMaterial({
+        color: 0xffffff,
+        wireframe: true,
+        transparent: true,
+        opacity: 0.9,
+      });
+      const mesh = new THREE.Mesh(geometry, material);
+      // Set base scale for fallback (similar to model scaling)
+      baseScaleRef.current = 2; // Scale to fit in a 2-unit space
+      mesh.scale.setScalar(2 * 0.01); // Start small
+      scene.add(mesh);
+      modelRef.current = mesh;
+      modelLoadedRef.current = true;
+      setModelLoaded(true);
+    };
+
+    loadModelByExtension(service.modelPath)
+      .then(applyModelToScene)
+      .catch(handleModelLoadError);
 
     // Lighting
     const light1 = new THREE.DirectionalLight(0xffffff, 1.5);
@@ -178,21 +246,22 @@ const ServiceCard3D = ({ service, index }: { service: ServiceConfig; index: numb
     // ============================================
     // ANIMATION LOOP
     // ============================================
-    let currentScale = 0.01;
+    let currentScaleFactor = 0.01;
     
     const animate = () => {
       animationRef.current = requestAnimationFrame(animate);
 
-      if (!meshRef.current) return;
+      if (!modelRef.current || !modelLoadedRef.current) return;
 
       // Smooth scale transition based on hover state
-      const targetScale = isHovered ? 1 : 0.01;
-      currentScale += (targetScale - currentScale) * 0.1;
-      meshRef.current.scale.set(currentScale, currentScale, currentScale);
+      const targetScaleFactor = isHoveredRef.current ? 1 : 0.01;
+      currentScaleFactor += (targetScaleFactor - currentScaleFactor) * 0.1;
+      const actualScale = baseScaleRef.current * currentScaleFactor;
+      modelRef.current.scale.setScalar(actualScale);
 
       // Continuous rotation
-      meshRef.current.rotation.x += 0.008;
-      meshRef.current.rotation.y += 0.012;
+      modelRef.current.rotation.x += 0.000;
+      modelRef.current.rotation.y += 0.012;
 
       if (rendererRef.current && sceneRef.current && cameraRef.current) {
         rendererRef.current.render(sceneRef.current, cameraRef.current);
@@ -217,26 +286,55 @@ const ServiceCard3D = ({ service, index }: { service: ServiceConfig; index: numb
     // Cleanup
     return () => {
       window.removeEventListener('resize', handleResize);
+
+      isCancelled = true;
       
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
+      
+      // Dispose model
+      if (modelRef.current) {
+        modelRef.current.traverse((child) => {
+          if (child instanceof THREE.Mesh) {
+            if (child.geometry) child.geometry.dispose();
+            if (child.material) {
+              if (Array.isArray(child.material)) {
+                child.material.forEach((mat) => mat.dispose());
+              } else {
+                child.material.dispose();
+              }
+            }
+          }
+        });
+        if (sceneRef.current && modelRef.current) {
+          sceneRef.current.remove(modelRef.current);
+        }
+      }
+      
       if (container && rendererRef.current && rendererRef.current.domElement) {
         container.removeChild(rendererRef.current.domElement);
       }
-      geometry.dispose();
-      material.dispose();
       if (rendererRef.current) {
         rendererRef.current.dispose();
       }
     };
-  }, [service.modelType]);
+  }, [service.modelPath]);
 
-  // Update scale when hover state changes (this provides additional smoothness)
+  // Update model material color on hover (optional enhancement)
   useEffect(() => {
-    // The animation loop handles the scale changes based on isHovered
-    // This effect is kept for future enhancements if needed
-  }, [isHovered]);
+    if (!modelRef.current || !modelLoaded) return;
+    
+    // Update material color based on hover state
+    modelRef.current.traverse((child) => {
+      if (child instanceof THREE.Mesh) {
+        if (child.material instanceof THREE.MeshPhongMaterial) {
+          // Slightly tint the material on hover
+          child.material.color.setHex(isHovered ? 0xffffff : 0xffffff);
+        }
+      }
+    });
+  }, [isHovered, modelLoaded]);
 
   return (
     <motion.div
@@ -245,8 +343,14 @@ const ServiceCard3D = ({ service, index }: { service: ServiceConfig; index: numb
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
       className="relative"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseEnter={() => {
+        setIsHovered(true);
+        isHoveredRef.current = true;
+      }}
+      onMouseLeave={() => {
+        setIsHovered(false);
+        isHoveredRef.current = false;
+      }}
     >
       <Card className="relative overflow-hidden p-8 h-full transition-all duration-500 hover:-translate-y-1">
         {/* ============================================
@@ -322,7 +426,7 @@ const ServiceCard3D = ({ service, index }: { service: ServiceConfig; index: numb
             </div>
           </div>
           
-          <div className={`pt-6 border-t transition-colors duration-500 ${
+          {/* <div className={`pt-6 border-t transition-colors duration-500 ${
             isHovered ? 'border-white/20' : 'border-border'
           }`}>
             <h4 
@@ -339,7 +443,7 @@ const ServiceCard3D = ({ service, index }: { service: ServiceConfig; index: numb
             >
               {service.example}
             </p>
-          </div>
+          </div> */}
         </div>
       </Card>
     </motion.div>
