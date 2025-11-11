@@ -61,15 +61,16 @@
     font-weight: 900;
     letter-spacing: -0.5rem;
     line-height: 1;
-    /* color: #4CAE4F; */
-    color: #f93535;
+    color: #4CAE4F;
+    /* color: #f93535; */
     user-select: none;
     transform: translateY(100%);
 }
 
 .team .name.default h1 {
     /* color: #6d6f6d; */
-    color: #e3e3db;
+    /* color: #e3e3db; */
+    color: #83541d;
     transform: translateY(-100%);
 }
 
