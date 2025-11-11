@@ -10,17 +10,7 @@ import { Button } from './ui/button';
 
 const navLinks = [
   { name: 'Home', path: '/' },
-<<<<<<< HEAD
-  { name: 'Services', path: '/services' },
   { name: 'Portfolio', path: '/portfolio' },
-=======
-  // { name: 'About', path: '/about' },
-  { name: 'Services', path: '/services' },
-  { name: 'Portfolio', path: '/portfolio' },
-  // { name: 'Clients', path: '/clients' },
-  // { name: 'Technologies', path: '/technologies' },
-  // { name: 'Contact', path: '/contact' },
->>>>>>> 14a20fe589cc8d757aedb0a074204e4fc3a137a4
 ];
 
 export const Navbar = () => {
