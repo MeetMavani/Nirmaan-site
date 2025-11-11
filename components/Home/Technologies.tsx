@@ -32,34 +32,47 @@ const techList = [
 ];
 
 const Technologies = () => {
-  const tlRefs = useRef([]);
-  const listenersRef = useRef([]);
+
+  // Technologies animation refs
+  const tlRefs = useRef<gsap.core.Tween[]>([]);
+  const listenersRef = useRef<
+    { el: Element; type: string; handler: EventListenerOrEventListenerObject }[]
+  >([]);
 
   useEffect(() => {
+    // Kill any previous tweens
     tlRefs.current.forEach((t) => t.kill());
     tlRefs.current = [];
 
     const sections = Array.from(document.querySelectorAll(".tech-scroll"));
 
     sections.forEach((section, index) => {
-      const row = section.querySelector(".tech-row");
+      const row = section.querySelector<HTMLElement>(".tech-row");
       if (!row) return;
 
       requestAnimationFrame(() => {
+        // Get all items in the row
+        const items = Array.from(row.children);
+        // Width of one set (1/3 since we render 3 sets)
         const singleWidth = row.scrollWidth / 3;
-        const dir = index % 2 === 0 ? -1 : 1;
-        const speed = 40;
 
+        // Alternate direction per row
+        const dir = index % 2 === 0 ? -1 : 1;
+        const speed = 40; // seconds for one full loop
+
+        // Start at 0 for left-moving, -singleWidth for right-moving
         gsap.set(row, { x: dir === -1 ? 0 : -singleWidth });
 
+        // Create seamless loop animation
         const tween = gsap.to(row, {
           x: dir === -1 ? -singleWidth : 0,
           duration: speed,
           ease: "none",
           repeat: -1,
           modifiers: {
-            x: (x) => {
+            x: (x: string) => {
               const parsed = parseFloat(x);
+              // Wrap the value to create infinite loop
               const wrapped = gsap.utils.wrap(-singleWidth, 0, parsed);
               return `${wrapped}px`;
             },
@@ -68,6 +81,7 @@ const Technologies = () => {
 
         tlRefs.current.push(tween);
 
+        // Interaction handlers
         const speedUp = () => tween.timeScale(2);
         const slowDown = () => tween.timeScale(1);
 
@@ -82,13 +96,15 @@ const Technologies = () => {
     return () => {
       tlRefs.current.forEach((t) => t.kill());
       tlRefs.current = [];
-      listenersRef.current.forEach(({ el, type, handler }) => el.removeEventListener(type, handler));
+      listenersRef.current.forEach(({ el, type, handler }) =>
+        el.removeEventListener(type, handler)
+      );
       listenersRef.current = [];
     };
   }, []);
 
   const itemsPerRow = 6;
-  const rows = [];
+  const rows: string[][] = [];
   for (let i = 0; i < techList.length; i += itemsPerRow) {
     rows.push(techList.slice(i, i + itemsPerRow));
   }
