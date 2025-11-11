@@ -20,14 +20,16 @@
     /* Layer 1 (top): grid, Layer 2 (bottom): transparent-to-black gradient starting at 20% */
     background-image:
         url('/profiles/grid.png'),
+
         linear-gradient(
-  to bottom,
-  rgb(241, 248, 242) 10%,    /* light start */
-  rgb(206, 211, 206) 25%,   /* soft gray-green blend */
-  rgb(90, 90, 90) 60%,      /* mid-dark */
-  rgb(30, 30, 30) 85%,      /* near black */
-  rgb(14, 15, 14) 100%      /* deep black end */
-);
+            to bottom,
+            #F1F8F2 10%,   /* very light top */
+            #c7e0cb 25%,   /* soft gray-green mid-light */
+            #669567 60%,   /* muted medium tone */
+            #448245 85%,   /* dark green */
+            #286b2b 100%   /* deep end tone */
+          );
+          
 
         /* linear-gradient(to bottom, rgba(241, 248, 242) 0%, rgb(216, 252, 219) 20%, rgb(15, 61, 18) 99%); */
     background-repeat: repeat, no-repeat;
@@ -74,17 +76,15 @@
     font-weight: 900;
     letter-spacing: -0.5rem;
     line-height: 1;
-    /* color: #206d23; */
-    color: #4CAE4F;
+    /* color: #cfe1b9; */
+    color: #e8fccf;
     /* color: #f93535; */
     user-select: none;
     transform: translateY(100%);
 }
 
 .team .name.default h1 {
-    /* color: #6d6f6d; */
-    color: #e3e3db;  
-    /* color: #83541d; */
+    color: #134611;  
     transform: translateY(-100%);
 }
 

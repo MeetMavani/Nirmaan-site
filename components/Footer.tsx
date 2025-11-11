@@ -4,7 +4,7 @@ import { themeConfig } from '@/config/theme';
 
 export const Footer = () => {
   return (
-    <footer className="bg-[#0f0f0f] text-primary-foreground py-12">
+    <footer className="bg-[linear-gradient(to_bottom,#2C6E2F_0%,#1B3A1D_50%,#0F1F10_100%)] text-primary-foreground py-12">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           {/* Company */}
