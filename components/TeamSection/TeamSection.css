@@ -100,7 +100,7 @@
         gap: 1.5em;
         padding: 1rem;
         /* On mobile, make the grid image appear "zoomed out" so the boxes look smaller */
-        background-size: 40px 40px;
+        background-size: 40px 40px, cover;
     }
 
     .team .profile-images {
