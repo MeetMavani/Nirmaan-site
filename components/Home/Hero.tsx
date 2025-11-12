@@ -11,7 +11,7 @@ const Hero = () => {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
       <div
-        className="absolute inset-0 bg-cover bg-center opacity-20"
+        className="absolute inset-0 bg-cover bg-center opacity-100"
         style={{ backgroundImage: `url('/assets/hero-bg.jpg')` }}
       />
 
@@ -19,7 +19,7 @@ const Hero = () => {
       <HeroBackground />
 
       {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/20 to-background" />
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 text-center">
