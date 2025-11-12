@@ -1,7 +1,18 @@
 "use client";
-import { ReactLenis } from "lenis/react"
-import StickyCards from "@/components/StickyCards/StickyCards"
-import './page.css'
+
+import { ReactLenis } from "lenis/react";
+import Link from "next/link";
+
+import StickyCards from "@/components/StickyCards/StickyCards";
+import { Button } from "@/components/ui/button";
+import { Barlow_Condensed } from "next/font/google";
+
+import "./page.css";
+
+const barlow = Barlow_Condensed({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+});
 
 const projects = [
   {
@@ -51,15 +62,46 @@ const Technologies = () => {
 
   return (
     <div className="portfolio-page">
-      <ReactLenis root/>
-      <section className="intro bg-[#1a1a1a] text-[#edf1e8]">
-        <h1 className="portfolio-page-title-intro">Our Projects</h1>
+      <ReactLenis root />
+      <section className="intro">
+        <div className="portfolio-page-section">
+          <span className="portfolio-page-eyebrow">Case studies</span>
+          <h1
+            className={`${barlow.className} portfolio-page-title-intro gradient-text`}
+          >
+            Our Projects
+          </h1>
+          <p className="portfolio-page-subhead">
+            A snapshot of the products and platforms we craft for founders and
+            teams who expect thoughtful design, strong engineering, and lasting
+            partnerships.
+          </p>
+        </div>
       </section>
 
       <StickyCards projects={stickyCardsData} />
 
-      <section className="outro bg-[#1a1a1a] text-[#edf1e8]">
-        <h1 className="portfolio-page-title-outro">More Projects in Progress</h1>
+      <section className="outro">
+        <div className="portfolio-page-section">
+          <h2 className="portfolio-page-eyebrow">Let’s build together</h2>
+          <h1
+            className={`${barlow.className} portfolio-page-title-outro gradient-text`}
+          >
+            More Projects in Progress
+          </h1>
+          <p className="portfolio-page-subhead">
+            We&apos;re constantly shipping new products—from growth experiments
+            to production-grade systems. Share your idea and we&apos;ll help map
+            the path to launch.
+          </p>
+          <div className="portfolio-page-actions">
+            <Link href="/contact">
+              <Button size="lg" className="portfolio-page-cta">
+                Start a project
+              </Button>
+            </Link>
+          </div>
+        </div>
       </section>
     </div>
   );

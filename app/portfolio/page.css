@@ -1,14 +1,22 @@
-.portfolio-page * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 .portfolio-page {
+    position: relative;
+    min-height: 100vh;
+    background: var(--gradient-subtle);
+    color: hsl(var(--foreground));
+    display: flex;
+    flex-direction: column;
+    gap: clamp(3rem, 6vw, 6rem);
+
     /* Global letter-spacing for the portfolio page */
     letter-spacing: var(--portfolio-letter-spacing, 0.01em);
     /* Mobile/compact default */
     --portfolio-letter-spacing-sm: 0.008em;
+}
+
+.portfolio-page * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 .portfolio-page img {
@@ -40,27 +48,105 @@ h1.portfolio-page-title-outro {
     line-height: 1.1;
 }
 
-/* Make StickyCards card titles responsive within the portfolio page */
-.portfolio-page .sticky-card-header {
-    font-size: clamp(1.5rem, 5vw, 3rem);
-}
-
-.portfolio-page p {
-    font-size: 1.5rem;
-    font-weight: 500;
-    letter-spacing: var(--portfolio-letter-spacing, 0.01em);
-}
-
 .portfolio-page section {
     position: relative;
     width: 100%;
-    height: 100svh;
-    /* background-color: #1a1a1a; */
-    color: #edf1e8;
+    min-height: clamp(28rem, 70vh, 48rem);
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
+    padding: clamp(4rem, 8vw, 8rem) 0;
+    overflow: hidden;
+}
+
+.portfolio-page section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(90% 90% at 50% 10%, hsla(var(--secondary) / 0.18) 0%, transparent 70%),
+                radial-gradient(60% 70% at 10% 90%, hsla(var(--accent) / 0.12) 0%, transparent 70%);
+    opacity: 0.75;
+    pointer-events: none;
+}
+
+.portfolio-page .intro::before {
+    background: radial-gradient(110% 90% at 50% 0%, hsla(var(--primary) / 0.22) 0%, transparent 70%),
+                radial-gradient(60% 80% at 85% 80%, hsla(var(--accent) / 0.18) 0%, transparent 70%);
+}
+
+.portfolio-page .outro::before {
+    background: radial-gradient(90% 90% at 50% 100%, hsla(var(--secondary) / 0.2) 0%, transparent 70%),
+                radial-gradient(60% 60% at 10% 20%, hsla(var(--accent) / 0.14) 0%, transparent 70%);
+}
+
+.portfolio-page-section {
+    position: relative;
+    z-index: 1;
+    max-width: min(64rem, 92%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(1.5rem, 4vw, 2.5rem);
+    letter-spacing: inherit;
+}
+
+.portfolio-page-eyebrow {
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    color: hsla(var(--secondary) / 0.9);
+}
+
+.gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.portfolio-page-subhead {
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+    font-weight: 500;
+    letter-spacing: inherit;
+    line-height: 1.7;
+    color: hsl(var(--muted-foreground));
+    max-width: 48rem;
+}
+
+.portfolio-page-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.portfolio-page-cta {
+    box-shadow: 0 20px 35px -20px hsla(var(--primary) / 0.55);
+    transition: transform 220ms ease, box-shadow 220ms ease;
+    padding: clamp(0.7rem, 1.6vw, 1rem) clamp(1.4rem, 2.8vw, 2rem);
+}
+
+.portfolio-page-cta:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 26px 45px -22px hsla(var(--primary) / 0.65);
+}
+
+/* Make StickyCards card titles responsive within the portfolio page */
+.portfolio-page .sticky-card-header {
+    font-size: clamp(1.5rem, 5vw, 3rem);
+    color: hsl(var(--foreground));
+}
+
+.portfolio-page p {
+    font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+    font-weight: 500;
+    letter-spacing: var(--portfolio-letter-spacing, 0.01em);
+}
+
+.portfolio-page .sticky-card-copy-description p {
+    color: hsl(var(--muted-foreground));
 }
 
 /* Ensure StickyCards text inherits the portfolio page letter-spacing */
@@ -73,20 +159,30 @@ h1.portfolio-page-title-outro {
 
 @media (max-width: 1000px) {
     .portfolio-page h1 {
-        font-size: 2rem;
+        font-size: 2.4rem;
         letter-spacing: var(--portfolio-letter-spacing-sm, 0.02em);
     }
 
     /* Ensure title still scales on mobile */
     h1.portfolio-page-title-intro {
-        font-size: clamp(2rem, 10vw, 4rem);
+        font-size: clamp(2.2rem, 11vw, 3.6rem);
     }
     h1.portfolio-page-title-outro {
-        font-size: clamp(2rem, 10vw, 4rem);
+        font-size: clamp(2.2rem, 11vw, 3.6rem);
     }
 
     .portfolio-page p {
-        font-size: 1rem;
+        font-size: 1.05rem;
         letter-spacing: var(--portfolio-letter-spacing-sm, 0.02em);
+    }
+
+    .portfolio-page-section {
+        gap: clamp(1.25rem, 4vw, 1.75rem);
+    }
+
+    .portfolio-page section {
+        min-height: auto;
+        padding: clamp(4rem, 12vw, 6rem) 0;
+        margin-top: 20;
     }
 }
