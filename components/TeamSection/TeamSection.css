@@ -17,10 +17,25 @@
     align-items: center;
     gap: 2.5em;
     overflow: hidden;
-    background-image: url('/profiles/grid.png');
-    /* ensure the grid repeats and is centered by default */
-    background-repeat: repeat;
-    background-position: center;
+    /* Layer 1 (top): grid, Layer 2 (bottom): transparent-to-black gradient starting at 20% */
+    background-image:
+        url('/profiles/grid.png'),
+
+        linear-gradient(
+            to bottom,
+            #F1F8F2 10%,   /* very light top */
+            #c7e0cb 25%,   /* soft gray-green mid-light */
+            #669567 60%,   /* muted medium tone */
+            #448245 85%,   /* dark green */
+            #286b2b 100%   /* deep end tone */
+          );
+          
+
+        /* linear-gradient(to bottom, rgba(241, 248, 242) 0%, rgb(216, 252, 219) 20%, rgb(15, 61, 18) 99%); */
+    background-repeat: repeat, no-repeat;
+    background-position: center, center;
+    /* Optional: default grid size on desktop for clarity */
+    background-size: auto, cover;
 }
 
 .team .profile-images {
@@ -61,16 +76,15 @@
     font-weight: 900;
     letter-spacing: -0.5rem;
     line-height: 1;
-    color: #4CAE4F;
+    /* color: #cfe1b9; */
+    color: #e8fccf;
     /* color: #f93535; */
     user-select: none;
     transform: translateY(100%);
 }
 
 .team .name.default h1 {
-    /* color: #6d6f6d; */
-    /* color: #e3e3db; */
-    color: #83541d;
+    color: #134611;  
     transform: translateY(-100%);
 }
 
@@ -86,7 +100,7 @@
         gap: 1.5em;
         padding: 1rem;
         /* On mobile, make the grid image appear "zoomed out" so the boxes look smaller */
-        background-size: 40px 40px;
+        background-size: 40px 40px, cover;
     }
 
     .team .profile-images {

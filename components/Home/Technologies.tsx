@@ -1,12 +1,11 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
-import { Card } from "@/components/ui/card";
-import gsap from "gsap";
+import { useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
+import gsap from 'gsap';
+import { Card } from '@/components/ui/card';
 
-// Flattened tech list
-export const techList = [
+const techList = [
   "React",
   "Next.js",
   "TypeScript",
@@ -33,6 +32,8 @@ export const techList = [
 ];
 
 const Technologies = () => {
+
+  // Technologies animation refs
   const tlRefs = useRef<gsap.core.Tween[]>([]);
   const listenersRef = useRef<
     { el: Element; type: string; handler: EventListenerOrEventListenerObject }[]
@@ -102,7 +103,6 @@ const Technologies = () => {
     };
   }, []);
 
-  // Split technologies into rows (6 per row) - you can change this number
   const itemsPerRow = 6;
   const rows: string[][] = [];
   for (let i = 0; i < techList.length; i += itemsPerRow) {
@@ -110,29 +110,25 @@ const Technologies = () => {
   }
 
   return (
-    <div className="min-h-screen pt-20">
-      {/* Hero */}
-      <section className="py-20 bg-gradient-subtle">
-        <div className="container mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              Technologies & Tools
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              We work with modern, battle-tested technologies to build robust
-              solutions
-            </p>
-          </motion.div>
-        </div>
-      </section>
+    <section className="py-20 bg-gradient-subtle">
+      <div className="container mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            Technologies & Tools
+          </h2>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            We work with modern, battle-tested technologies to build robust
+            solutions
+          </p>
+        </motion.div>
 
-      {/* Continuous Grid */}
-      <section className="py-20">
-        <div className="container mx-auto px-4 space-y-16">
+        <div className="space-y-16 mb-20">
           {rows.map((row, rowIndex) => (
             <motion.div
               key={rowIndex}
@@ -142,12 +138,11 @@ const Technologies = () => {
               viewport={{ once: true, margin: "-100px" }}
               transition={{
                 duration: 0.6,
-                delay: rowIndex * 0.15, // Stagger delay between rows
+                delay: rowIndex * 0.15,
                 ease: "easeOut"
               }}
             >
               <div className="flex gap-6 tech-row will-change-transform">
-                {/* Render each row 3 times for seamless looping */}
                 {[...Array(3)].flatMap((_, setIndex) =>
                   row.map((tech, techIndex) => (
                     <motion.div
@@ -171,27 +166,11 @@ const Technologies = () => {
             </motion.div>
           ))}
         </div>
-      </section>
-
-      {/* Footer / Note Section */}
-      <section className="py-20 bg-card">
-        <div className="container mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl font-bold mb-6">Not Just Tools, Expertise</h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-8">
-              We don't just use these technologies — we master them. Our team
-              stays updated with the latest best practices and contributes to open
-              source communities, ensuring high-quality, scalable solutions.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 };
 
 export default Technologies;
+
+
