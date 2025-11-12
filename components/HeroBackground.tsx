@@ -56,7 +56,6 @@ export const HeroBackground = () => {
   // Only render Canvas on client to prevent hydration mismatch
   // This is a valid pattern for client-only rendering in Next.js
   useEffect(() => {
-    // @ts-expect-error - Valid pattern for client-only rendering
     setMounted(true);
   }, []);
 
