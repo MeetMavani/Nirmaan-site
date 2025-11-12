@@ -8,6 +8,7 @@ import * as THREE from 'three';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import React from 'react';
+import { combineDomainOfAllAppliedNumericalValuesIncludingErrorValues } from 'recharts/types/state/selectors/axisSelectors';
 
 // ============================================
 // 3D MODEL CONFIGURATION
@@ -18,7 +19,7 @@ const serviceConfigs = [
     icon: Code2,
     title: 'Web Development',
     summary: 'Build powerful, responsive web applications that scale with your business',
-    tools: ['React', 'Next.js', 'Vue', 'TypeScript', 'Tailwind CSS'],
+    tools: ['React', 'Next.js', 'Vue', 'TypeScript', 'Tailwind CSS', 'GSAP', 'Motion', 'Three.js', 'WordPress', 'Bubble.io'],
     // example: 'Built a real-time collaboration platform serving 50K+ users with 99.9% uptime',
     modelPath: '/3d_models/Phone.fbx',
     hoverColor: '#10b981', // Green - CUSTOMIZE THIS
@@ -27,7 +28,7 @@ const serviceConfigs = [
     icon: Smartphone,
     title: 'Mobile Development',
     summary: 'Native and cross-platform mobile apps for iOS and Android',
-    tools: ['React Native', 'Flutter', 'Swift', 'Kotlin'],
+    tools: ['React Native', 'Flutter', 'Android Studio', 'Kotlin', 'Bubble.io'],
     // example: 'Delivered a fintech app with biometric authentication and offline capabilities',
     modelPath: '/3d_models/Phone.fbx',
     hoverColor: '#3b82f6', // Blue - CUSTOMIZE THIS
@@ -36,7 +37,7 @@ const serviceConfigs = [
     icon: Cloud,
     title: 'Cloud Solutions',
     summary: 'Scalable cloud infrastructure and migration services',
-    tools: ['AWS', 'GCP', 'Azure', 'Docker', 'Kubernetes'],
+    tools: ['AWS', 'GCP', 'Docker', 'Kubernetes', 'Vercel', 'Firebase'],
     // example: 'Migrated legacy monolith to microservices, reducing costs by 40%',
     modelPath: '/3d_models/Cloud_2.gltf',
     hoverColor: '#8b5cf6', // Purple - CUSTOMIZE THIS
@@ -45,7 +46,7 @@ const serviceConfigs = [
     icon: Database,
     title: 'Backend Development',
     summary: 'Robust APIs and server-side logic for complex business requirements',
-    tools: ['Node.js', 'Python', 'PostgreSQL', 'MongoDB', 'Redis'],
+    tools: ['Node.js', 'Python', 'PostgreSQL', 'MongoDB', 'Redis', 'Express', 'Django', 'Flask'],
     // example: 'Created high-performance API handling 10M+ requests daily',
     modelPath: '/3d_models/Prop_Crate.gltf',
     hoverColor: '#f59e0b', // Orange - CUSTOMIZE THIS
@@ -54,7 +55,7 @@ const serviceConfigs = [
     icon: Cpu,
     title: 'AI Integration',
     summary: 'Integrate AI/ML capabilities into your applications',
-    tools: ['TensorFlow', 'PyTorch', 'OpenAI', 'Langchain'],
+    tools: ['TensorFlow', 'PyTorch', 'OpenAI', 'Langchain', 'OpenCV', 'NLP', 'Image Processing'],
     // example: 'Implemented AI chatbot reducing customer support tickets by 60%',
     modelPath: '/3d_models/Enemy_EyeDrone.gltf',
     hoverColor: '#ec4899', // Pink - CUSTOMIZE THIS
@@ -63,7 +64,7 @@ const serviceConfigs = [
     icon: Palette,
     title: 'UI/UX Design',
     summary: 'Beautiful, intuitive interfaces that users love',
-    tools: ['Figma', 'Adobe XD', 'Framer', 'Design Systems'],
+    tools: ['Figma', 'Canva', 'Framer', 'Design Systems'],
     // example: 'Redesigned e-commerce platform, increasing conversions by 35%',
     modelPath: '/3d_models/Cloud_3.gltf',
     hoverColor: '#06b6d4', // Cyan - CUSTOMIZE THIS
