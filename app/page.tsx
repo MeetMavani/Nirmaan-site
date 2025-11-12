@@ -14,7 +14,7 @@ const Home = () => {
       <Hero />
 
       {/* 2. Who Are We */}
-      <section className="py-20">
+      <section className="">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0 }}
