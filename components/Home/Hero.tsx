@@ -19,7 +19,7 @@ const Hero = () => {
       <HeroBackground />
 
       {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/20 to-background" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background/0 via-background/0 to-background" />
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 text-center">
