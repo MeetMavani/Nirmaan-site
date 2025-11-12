@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { Card } from '@/components/ui/card';
@@ -32,6 +32,10 @@ const techList = [
 ];
 
 const Technologies = () => {
+  // Hover state for popup - tracks which technology is currently hovered
+  const [hoveredTech, setHoveredTech] = useState<string | null>(null);
+  // Mouse position for popup placement
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   // Technologies animation refs
   const tlRefs = useRef<gsap.core.Tween[]>([]);
@@ -149,6 +153,21 @@ const Technologies = () => {
                       key={`${tech}-set${setIndex}-${techIndex}`}
                       whileHover={{ scale: 1.1 }}
                       className="flex-shrink-0"
+                      onMouseEnter={(e) => {
+                        // Show popup with technology name on hover
+                        setHoveredTech(tech);
+                        setMousePosition({ x: e.clientX, y: e.clientY });
+                      }}
+                      onMouseMove={(e) => {
+                        // Update popup position as mouse moves over icon
+                        if (hoveredTech === tech) {
+                          setMousePosition({ x: e.clientX, y: e.clientY });
+                        }
+                      }}
+                      onMouseLeave={() => {
+                        // Hide popup immediately when mouse leaves icon
+                        setHoveredTech(null);
+                      }}
                     >
                       <Card className="p-6 flex items-center justify-center bg-transparent shadow-none border-none transition-all cursor-pointer group w-32 h-32 md:w-36 md:h-36">
                         <div className="group-hover:scale-110 transition-transform">
@@ -167,6 +186,50 @@ const Technologies = () => {
           ))}
         </div>
       </div>
+
+      {/* Glass blur popup - shows technology name on hover */}
+      {hoveredTech && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.8 }}
+          transition={{ duration: 0.2 }}
+          className="fixed z-50 pointer-events-none"
+          style={{
+            // Popup offset from mouse cursor - adjust these values to change position
+            left: `${mousePosition.x + 15}px`, // Horizontal offset: increase for more space from cursor
+            top: `${mousePosition.y - 45}px`,  // Vertical offset: increase to move popup higher
+            transform: 'translate(0, -100%)',
+          }}
+        >
+          <div
+            className="px-4 py-2 text-sm font-medium text-foreground whitespace-nowrap"
+            style={{
+              // CORNER ROUNDNESS: Change 'rounded-lg' class to adjust corner roundness
+              // Options: rounded-none, rounded-sm, rounded, rounded-md, rounded-lg, rounded-xl, rounded-2xl, rounded-full
+              // Or use inline: borderRadius: '8px' (adjust px value for custom roundness)
+              borderRadius: '4px', // Change this value (e.g., 4px, 12px, 16px) to adjust corner roundness
+              
+              // BLUR DENSITY: Change the blur value (e.g., 8px, 12px, 16px, 20px) for more/less blur
+              backdropFilter: 'blur(2px) saturate(180%)', // Adjust blur(12px) - higher = more blur
+              WebkitBackdropFilter: 'blur(2px) saturate(180%)', // Same for Safari support
+              
+              // BACKGROUND OPACITY: Change rgba alpha value (0.0 to 1.0) to adjust transparency
+              // Lower value (e.g., 0.5) = more transparent, higher (e.g., 0.9) = more opaque
+              backgroundColor: 'rgba(255, 255, 255, 0.75)', // Change 0.75 to adjust background opacity
+              
+              // BORDER OPACITY: Change rgba alpha value to adjust border visibility
+              border: '1px solid rgba(255, 255, 255, 0.3)', // Change 0.3 to adjust border opacity
+              
+              // SHADOW: Adjust boxShadow values for different shadow effects
+              // Format: '0 [vertical]px [blur]px [spread]px rgba(color, opacity)'
+              boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)', // Adjust for shadow intensity
+            }}
+          >
+            {hoveredTech}
+          </div>
+        </motion.div>
+      )}
     </section>
   );
 };
