@@ -1,6 +1,5 @@
 "use client";
 
-import { ReactLenis } from "lenis/react";
 import Link from "next/link";
 
 import StickyCards from "@/components/StickyCards/StickyCards";
@@ -62,7 +61,6 @@ const Technologies = () => {
 
   return (
     <div className="portfolio-page">
-      <ReactLenis root />
       <section className="intro">
         <div className="portfolio-page-section">
           <span className="portfolio-page-eyebrow">Case studies</span>
