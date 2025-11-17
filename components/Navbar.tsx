@@ -6,11 +6,17 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { themeConfig } from "@/config/theme";
 import { Button } from "./ui/button";
+import { Barlow_Condensed } from "next/font/google";
 
 const navLinks = [
   { name: "Home", path: "/" },
   { name: "Portfolio", path: "/portfolio" },
 ];
+
+const barlow = Barlow_Condensed({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+});
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -182,13 +188,12 @@ export const Navbar = () => {
                 className="ml-auto mb-auto flex flex-col items-end gap-1 text-[10px] font-semibold uppercase tracking-[0.4em] text-white"
               >
                 <span className="relative block h-12 w-20">
-                  <span className="absolute inset-0 bg-lime-400 rounded-sm rotate-3 shadow-[0_8px_20px_rgba(0,0,0,0.35)]" />
-                  <span className="absolute inset-0 bg-lime-300 rounded-sm -rotate-6 translate-y-1 border border-black/10" />
-                  <span className="absolute inset-0 flex items-center justify-center text-sm font-bold text-[#1f1f1f]">
+                  <span className="absolute inset-0 bg-[#93B896] rounded-sm rotate-3 shadow-[0_8px_20px_rgba(0,0,0,0.35)]" />
+                  <span className="absolute inset-0 bg-[#F1F8F2] rounded-sm -rotate-6 translate-y-1 border border-black/10" />
+                  <span className="absolute inset-0 flex items-center justify-center text-sm font-bold text-[#4B864C] mt-3">
                     Close
                   </span>
                 </span>
-                <span className="h-1 w-12 rounded-full bg-lime-300/90" />
               </motion.button>
 
               <motion.ul
@@ -202,7 +207,7 @@ export const Navbar = () => {
                     transition: { staggerChildren: 0.08 },
                   },
                 }}
-                className="space-y-6 text-white"
+                className="space-y-6"
               >
                 {navLinks.map((link) => (
                   <motion.li
@@ -215,15 +220,15 @@ export const Navbar = () => {
                     <Link
                       href={link.path}
                       onClick={() => setIsOpen(false)}
-                      className={`flex flex-col text-4xl font-black uppercase tracking-wide transition-colors ${
+                      className={`${barlow.className} flex flex-col text-4xl font-black uppercase tracking-wide transition-colors ${
                         pathname === link.path
-                          ? "text-white"
-                          : "text-white/70 hover:text-white"
+                          ? "text-[#19601e]"
+                          : "text-[#5d925f]"
                       }`}
                     >
                       <span
-                        className={`text-base font-light italic lowercase tracking-[0.4em] mb-1 ${
-                          pathname === link.path ? "text-secondary" : "text-white/60"
+                        className={`text-base text-[#6a8e69] font-light italic lowercase tracking-[0.4em] mb-1 ${
+                          pathname === link.path ? "text-secondary" : "text-[#F1F8F2]"
                         }`}
                       >
                         {link.name.toLowerCase()}
@@ -240,13 +245,13 @@ export const Navbar = () => {
                 transition={{ delay: 0.4 }}
                 className="flex flex-col gap-4"
               >
-                <div className="flex items-center gap-3 text-white/60 text-sm tracking-[0.4em] uppercase">
-                  <span className="h-px flex-1 bg-white/20" />
+                <div className="flex items-center gap-3 text-[#134611] text-sm tracking-[0.4em] uppercase">
+                  <span className="h-px flex-1 bg-[#7ab888]" />
                   Menu
-                  <span className="h-px flex-1 bg-white/20" />
+                  <span className="h-px flex-1 bg-[#7ab888]" />
                 </div>
                 <Link href="/contact" onClick={() => setIsOpen(false)}>
-                  <Button className="w-full bg-white text-[#1f1f1f] hover:bg-white/90">
+                  <Button className="w-full bg-[#a5c5a7] text-[#134611] hover:bg-white/90">
                     Get In Touch
                   </Button>
                 </Link>
