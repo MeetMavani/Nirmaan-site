@@ -207,7 +207,7 @@ export const Navbar = () => {
                     transition: { staggerChildren: 0.08 },
                   },
                 }}
-                className="space-y-6"
+                className="space-y-2"
               >
                 {navLinks.map((link) => (
                   <motion.li
@@ -222,17 +222,11 @@ export const Navbar = () => {
                       onClick={() => setIsOpen(false)}
                       className={`${barlow.className} flex flex-col text-4xl font-black uppercase tracking-wide transition-colors ${
                         pathname === link.path
-                          ? "text-[#19601e]"
-                          : "text-[#5d925f]"
+                          ? "text-[#366d3f]"
+                          : "text-[#366d3f]"
                       }`}
                     >
-                      <span
-                        className={`text-base text-[#6a8e69] font-light italic lowercase tracking-[0.4em] mb-1 ${
-                          pathname === link.path ? "text-secondary" : "text-[#F1F8F2]"
-                        }`}
-                      >
-                        {link.name.toLowerCase()}
-                      </span>
+                      
                       {link.name}
                     </Link>
                   </motion.li>
@@ -247,7 +241,7 @@ export const Navbar = () => {
               >
                 <div className="flex items-center gap-3 text-[#134611] text-sm tracking-[0.4em] uppercase">
                   <span className="h-px flex-1 bg-[#7ab888]" />
-                  Menu
+                  {"</>"}
                   <span className="h-px flex-1 bg-[#7ab888]" />
                 </div>
                 <Link href="/contact" onClick={() => setIsOpen(false)}>
