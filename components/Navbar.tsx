@@ -71,7 +71,7 @@ export const Navbar = () => {
           <Link
             href="/"
             className={`text-2xl font-bold transition-all duration-500 ${
-              shrink ? "translate-x-[560px]" : "translate-x-0"
+              shrink ? "translate-x-[29vw]" : "translate-x-0"
             }`}
           >
             <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
@@ -84,7 +84,7 @@ export const Navbar = () => {
 
             {/* HOME + PORTFOLIO (fade only) */}
             <div
-              className={`flex items-center gap-8 transition-all duration-500 ${
+              className={`flex items-center gap-8 transition-all duration-400 ${
                 shrink ? "opacity-0 pointer-events-none" : "opacity-100"
               }`}
             >
@@ -114,7 +114,7 @@ export const Navbar = () => {
             <Link
               href="/contact"
               className={`transition-all duration-500 ${
-                shrink ? "-translate-x-[560px]" : "translate-x-0"
+                shrink ? "-translate-x-[29vw]" : "translate-x-0"
               }`}
             >
               <Button variant="default" size="sm">Get In Touch</Button>
