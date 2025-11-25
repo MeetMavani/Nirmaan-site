@@ -177,8 +177,7 @@ const Technologies = () => {
                       }}
                       
                     >
-                      <div className="p-6 flex items-center justify-center bg-transparent shadow-none border-none transition-all cursor-pointer group 
-w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32">
+                      <div className="p-6 flex items-center justify-center bg-transparent shadow-none border-none transition-all cursor-pointer group w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32">
                         <div className="group-hover:scale-110 transition-transform">
                           <Image
                             src={`/icons/${tech}.svg`}

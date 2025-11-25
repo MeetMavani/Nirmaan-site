@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Github, Linkedin, Twitter, Mail, Phone } from 'lucide-react';
+import { Github, Linkedin, Twitter, Instagram, Mail, Phone } from 'lucide-react';
 import { themeConfig } from '@/config/theme';
 
 export const Footer = () => {
@@ -65,13 +65,21 @@ export const Footer = () => {
               >
                 <Github size={20} />
               </a>
-              <a
+              {/* <a
                 href={themeConfig.company.social.twitter}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-secondary transition-colors"
               >
                 <Twitter size={20} />
+              </a> */}
+              <a
+                href={themeConfig.company.social.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-secondary transition-colors"
+              >
+                <Instagram size={20} />
               </a>
             </div>
           </div>

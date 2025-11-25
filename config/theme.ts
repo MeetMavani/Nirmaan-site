@@ -29,9 +29,10 @@ export const themeConfig = {
     email: 'nirmaan.create@gmail.com',
     phone: '+91 9850015522',
     social: {
-      linkedin: 'https://linkedin.com/company/nirmaan',
+      linkedin: 'https://www.linkedin.com/company/nirmaan-agency',
       github: 'https://github.com/nirmaan',
-      twitter: 'https://twitter.com/nirmaan'
+      twitter: 'https://twitter.com/nirmaan',
+      instagram: 'https://www.instagram.com/nirmaan.devv/'
     }
   },
 
