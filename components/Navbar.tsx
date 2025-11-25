@@ -67,11 +67,11 @@ export const Navbar = () => {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-20">
 
-          {/* ---------------- LEFT: LOGO ---------------- */}
+          {/* ---------------- LEFT: LOGO ---------------- */}  
           <Link
             href="/"
             className={`text-2xl font-bold transition-all duration-500 ${
-              shrink ? "translate-x-[29vw]" : "translate-x-0"
+              shrink ? "md:translate-x-[clamp(12vw,28vw,30vw)]" : "translate-x-0"
             }`}
           >
             <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
@@ -85,7 +85,7 @@ export const Navbar = () => {
             {/* HOME + PORTFOLIO (fade only) */}
             <div
               className={`flex items-center gap-8 transition-all duration-400 ${
-                shrink ? "opacity-0 pointer-events-none" : "opacity-100"
+                shrink ? "opacity-0 -translate-y-2 pointer-events-none" : "opacity-100 translate-y-0 pointer-events-auto"
               }`}
             >
               {navLinks.map((link) => (
@@ -114,7 +114,9 @@ export const Navbar = () => {
             <Link
               href="/contact"
               className={`transition-all duration-500 ${
-                shrink ? "-translate-x-[29vw]" : "translate-x-0"
+                shrink
+                  ? "md:translate-x-[calc(-1*clamp(12vw,28vw,30vw))]"
+                  : "translate-x-0"
               }`}
             >
               <Button variant="default" size="sm">Get In Touch</Button>
@@ -139,17 +141,17 @@ export const Navbar = () => {
               <span className="relative w-6 h-6">
                 <span
                   className={`absolute left-0 right-0 h-0.5 bg-current transition-all duration-300 ${
-                    isOpen ? "top-1/2 rotate-45" : "top-1.5 -translate-y-1/2"
+                    isOpen ? "top-1/2 rotate-45" : "top-[25%]"
                   }`}
                 />
                 <span
                   className={`absolute left-0 right-0 h-0.5 bg-current transition-all duration-300 ${
-                    isOpen ? "opacity-0" : "top-1/2 -translate-y-1/2"
+                    isOpen ? "opacity-0" : "top-1/2"
                   }`}
                 />
                 <span
                   className={`absolute left-0 right-0 h-0.5 bg-current transition-all duration-300 ${
-                    isOpen ? "top-1/2 -rotate-45" : "bottom-1.5 translate-y-1/2"
+                    isOpen ? "top-1/2 -rotate-45" : "top-[75%]"
                   }`}
                 />
               </span>
@@ -163,9 +165,9 @@ export const Navbar = () => {
         {isOpen && (
           <motion.div
             key="mobile-overlay"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
+            animate={{ opacity: 1, backdropFilter: "blur(16px)" }}
+            exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
             transition={{ duration: 0.3 }}
             className="fixed inset-0 z-[60] bg-white/10 backdrop-blur-xl md:hidden border-b border-white/10 transition-all duration-300"
           >

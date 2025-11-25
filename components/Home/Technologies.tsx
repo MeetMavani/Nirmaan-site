@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
-import { Card } from '@/components/ui/card';
+import Image from 'next/image';
 
 const techList = [
   "React",
@@ -34,8 +34,10 @@ const techList = [
 const Technologies = () => {
   // Hover state for popup - tracks which technology is currently hovered
   const [hoveredTech, setHoveredTech] = useState<string | null>(null);
-  // Mouse position for popup placement
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const mousePosRef = useRef({ x: 0, y: 0 });
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [renderFlag, setRenderFlag] = useState(0);
 
   // Technologies animation refs
   const tlRefs = useRef<gsap.core.Tween[]>([]);
@@ -55,8 +57,6 @@ const Technologies = () => {
       if (!row) return;
 
       requestAnimationFrame(() => {
-        // Get all items in the row
-        const items = Array.from(row.children);
         // Width of one set (1/3 since we render 3 sets)
         const singleWidth = row.scrollWidth / 3;
 
@@ -87,7 +87,8 @@ const Technologies = () => {
 
         // Interaction handlers
         const speedUp = () => tween.timeScale(2);
-        const slowDown = () => tween.timeScale(1);
+        const slowDown = () => gsap.to(tween, { timeScale: 1, duration: 0.4 });
+
 
         section.addEventListener("wheel", speedUp, { passive: true });
         section.addEventListener("mouseleave", slowDown);
@@ -113,6 +114,7 @@ const Technologies = () => {
     rows.push(techList.slice(i, i + itemsPerRow));
   }
 
+
   return (
     <section className="py-20 bg-gradient-subtle">
       <div className="container mx-auto px-4">
@@ -132,7 +134,7 @@ const Technologies = () => {
           </p>
         </motion.div>
 
-        <div className="space-y-16 mb-20">
+        <div className="space-y-16">
           {rows.map((row, rowIndex) => (
             <motion.div
               key={rowIndex}
@@ -146,7 +148,7 @@ const Technologies = () => {
                 ease: "easeOut"
               }}
             >
-              <div className="flex gap-6 tech-row will-change-transform">
+              <div className="flex gap-3 sm:gap-4 md:gap-6 tech-row will-change-transform">
                 {[...Array(3)].flatMap((_, setIndex) =>
                   row.map((tech, techIndex) => (
                     <motion.div
@@ -154,30 +156,40 @@ const Technologies = () => {
                       whileHover={{ scale: 1.1 }}
                       className="flex-shrink-0"
                       onMouseEnter={(e) => {
-                        // Show popup with technology name on hover
+                        if (window.innerWidth < 768) return;
+                      
+                        mousePosRef.current = { x: e.clientX, y: e.clientY };
                         setHoveredTech(tech);
-                        setMousePosition({ x: e.clientX, y: e.clientY });
+                        setRenderFlag((r) => r + 1);  // trigger ONE re-render
                       }}
+                      
                       onMouseMove={(e) => {
-                        // Update popup position as mouse moves over icon
+                        if (window.innerWidth < 768) return;
+                      
                         if (hoveredTech === tech) {
-                          setMousePosition({ x: e.clientX, y: e.clientY });
+                          mousePosRef.current = { x: e.clientX, y: e.clientY };
                         }
                       }}
+                      
                       onMouseLeave={() => {
-                        // Hide popup immediately when mouse leaves icon
                         setHoveredTech(null);
+                        setRenderFlag((r) => r + 1);  // trigger re-render to hide popup
                       }}
+                      
                     >
-                      <Card className="p-6 flex items-center justify-center bg-transparent shadow-none border-none transition-all cursor-pointer group w-32 h-32 md:w-36 md:h-36">
+                      <div className="p-6 flex items-center justify-center bg-transparent shadow-none border-none transition-all cursor-pointer group 
+w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32">
                         <div className="group-hover:scale-110 transition-transform">
-                          <img
+                          <Image
                             src={`/icons/${tech}.svg`}
                             alt={tech}
+                            width={80}
+                            height={80}
                             className="w-16 h-16 md:w-20 md:h-20 object-contain"
                           />
                         </div>
-                      </Card>
+                      </div>
+
                     </motion.div>
                   ))
                 )}
@@ -188,6 +200,7 @@ const Technologies = () => {
       </div>
 
       {/* Glass blur popup - shows technology name on hover */}
+      {/* eslint-disable react-hooks/refs */}
       {hoveredTech && (
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
@@ -196,11 +209,11 @@ const Technologies = () => {
           transition={{ duration: 0.2 }}
           className="fixed z-50 pointer-events-none"
           style={{
-            // Popup offset from mouse cursor - adjust these values to change position
-            left: `${mousePosition.x + 15}px`, // Horizontal offset: increase for more space from cursor
-            top: `${mousePosition.y - 45}px`,  // Vertical offset: increase to move popup higher
-            transform: 'translate(0, -100%)',
-          }}
+            left: `${mousePosRef.current.x + 15}px`,
+            top: `${mousePosRef.current.y - 45}px`,
+            transform: "translate(0, -100%)",
+          }}          
+          
         >
           <div
             className="px-4 py-2 text-sm font-medium text-foreground whitespace-nowrap"
