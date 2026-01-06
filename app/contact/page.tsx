@@ -63,10 +63,33 @@ const Contact: React.FC = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleFormSubmit = () => {
-    setIsSubmitting(true);
-    setTimeout(() => setIsSubmitting(false), 1500);
+  const onSubmit = async (data: ContactFormData) => {
+    try {
+      setIsSubmitting(true);
+  
+      const response = await fetch("https://formspree.io/f/mjgkejga", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Form submission failed");
+      }
+  
+      // optional: success UI
+      alert("Message sent successfully!");
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+  
   
   const contactSchema = z.object({
     name: z.string().trim().min(2, "Name must be at least 2 characters"),
@@ -190,9 +213,9 @@ const Contact: React.FC = () => {
               <Card className="p-8">
                 <h2 className="text-3xl font-bold mb-6">Send Us a Message</h2>
                 <form
-                  action="https://formspree.io/f/mjgkejga"
-                  method="POST"
-                  onSubmit={handleSubmit(() => handleFormSubmit())}
+                  // action="https://formspree.io/f/mjgkejga"
+                  // method="POST"
+                  onSubmit={handleSubmit(onSubmit)}
                   className="space-y-6"
                 >
                   <div>
