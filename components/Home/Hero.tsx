@@ -4,12 +4,14 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import dynamic from "next/dynamic";
-import { HeroBackground } from '@/components/HeroBackground';
 import { Button } from '@/components/ui/button';
 
-const Hero = () => {
+const HeroBackground = dynamic(
+  () => import("@/components/HeroBackground"),
+  { ssr: false }
+);
 
-  const HeroBackground = dynamic(() => import('@/components/HeroBackground'), { ssr: false });
+const Hero = () => {
   
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
