@@ -10,7 +10,13 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { themeConfig } from '@/config/theme';
-import { useToast } from '@/hooks/use-toast';
+import { useState } from 'react';
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { FaWhatsapp } from "react-icons/fa";
+
+
 
 interface ContactInfo {
   icon: React.ComponentType<{ className?: string }>;
@@ -18,6 +24,11 @@ interface ContactInfo {
   value: string;
   link: string;
 }
+
+// Format phone number for WhatsApp (remove spaces, +, etc.)
+const formatPhoneForWhatsApp = (phone: string) => {
+  return phone.replace(/\D/g, '');
+};
 
 const contactInfo: ContactInfo[] = [
   {
@@ -33,29 +44,55 @@ const contactInfo: ContactInfo[] = [
     link: `tel:${themeConfig.company.phone}`
   },
   {
-    icon: MessageCircle,
+    icon: FaWhatsapp,
     label: 'WhatsApp',
     value: themeConfig.company.phone,
-    link: `https://wa.me/919284162482?text=Hi%20Nirmaan!%20I%20came%20across%20your%20website%20and%20would%20like%20to%20connect.`
+    link: `https://wa.me/${formatPhoneForWhatsApp(themeConfig.company.phone)}?text=Hi%20Nirmaan!%20I%20came%20across%20your%20website%20and%20would%20like%20to%20connect.`
   },
   {
     icon: MapPin,
     label: 'Location',
     value: 'Pune, Maharashtra',
-    link: '#'
+    link: 'https://maps.google.com/?q=Pune,Maharashtra'
   }
-];
+];  
+
+
 
 const Contact: React.FC = () => {
-  const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    toast({
-      title: "Message Sent!",
-      description: "We'll get back to you within 24 hours.",
-    });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleFormSubmit = () => {
+    setIsSubmitting(true);
+    setTimeout(() => setIsSubmitting(false), 1500);
   };
+  
+  const contactSchema = z.object({
+    name: z.string().trim().min(2, "Name must be at least 2 characters"),
+    email: z.string().email("Enter a valid email address"),
+    phone: z
+      .string()
+      .trim()
+      .min(10, "Enter a valid phone number"),
+    projectType: z.string().min(1, "Select a project type"),
+    budget: z.string().min(1, "Select a budget range"),
+    timeline: z.string().optional(),
+    message: z.string().trim().min(20, "Message must be at least 20 characters"),
+  });
+  
+  
+  type ContactFormData = z.infer<typeof contactSchema>;
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ContactFormData>({
+    resolver: zodResolver(contactSchema),
+  });
+  
+  
 
   return (
     <div className="min-h-screen pt-20">
@@ -92,26 +129,48 @@ const Contact: React.FC = () => {
               </p>
 
               <div className="space-y-6 mb-8">
-                {contactInfo.map((info, index) => (
-                  <motion.a
-                    key={info.label}
-                    href={info.link}
-                    target={info.label === 'WhatsApp' || info.label === 'Email' ? '_blank' : undefined}
-                    rel={info.label === 'WhatsApp' || info.label === 'Email' ? 'noopener noreferrer' : undefined}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    className="flex items-start gap-4 group"
-                  >
-                    <div className="p-3 bg-secondary/10 rounded-lg group-hover:bg-secondary/20 transition-colors">
-                      <info.icon className="w-6 h-6 text-secondary" />
-                    </div>
-                    <div>
-                      <p className="font-semibold mb-1">{info.label}</p>
-                      <p className="text-muted-foreground">{info.value}</p>
-                    </div>
-                  </motion.a>
-                ))}
+                {contactInfo.map((info, index) => {
+                  const isWhatsApp = info.label === "WhatsApp";
+                  const isExternal = info.label === "WhatsApp" || info.label === "Location";
+                  
+                  return (
+                    <motion.a
+                      key={info.label}
+                      href={info.link}
+                      aria-label={`Contact via ${info.label}`}
+                      target={isExternal ? "_blank" : undefined}
+                      rel={isExternal ? "noopener noreferrer" : undefined}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      className={`flex items-start gap-4 group rounded-xl p-4 transition-all
+                        ${isWhatsApp
+                          ? "bg-green-500/10 border border-green-500/30 hover:bg-green-500/20"
+                          : ""
+                        }
+                      `}
+                    >
+                      <div className={`p-3 rounded-lg transition-colors
+                          ${isWhatsApp
+                            ? "bg-green-500/20 text-green-600"
+                            : "bg-secondary/10 group-hover:bg-secondary/20"
+                          }
+                        `}
+                      >
+                        <info.icon className="w-6 h-6 text-secondary" />
+                      </div>
+                      <div>
+                        <p className="font-semibold mb-1">{info.label}</p>
+                        <p className="text-muted-foreground">{info.value}</p>
+
+                        {isWhatsApp && (
+                          <p className="text-sm text-green-600 font-medium mt-1">
+                            Fastest response on WhatsApp
+                          </p>
+                        )}
+                      </div>
+                    </motion.a>
+                )})}
               </div>
 
               <Card className="p-6 bg-gradient-accent text-muted-foreground">
@@ -130,17 +189,25 @@ const Contact: React.FC = () => {
             >
               <Card className="p-8">
                 <h2 className="text-3xl font-bold mb-6">Send Us a Message</h2>
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form
+                  action="https://formspree.io/f/mjgkejga"
+                  method="POST"
+                  onSubmit={handleSubmit(() => handleFormSubmit())}
+                  className="space-y-6"
+                >
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium mb-2">
                       Name *
                     </label>
                     <Input
-                      id="name"
+                      {...register("name")}
+                      name="name"
+                      autoComplete="name"
                       placeholder="Your name"
-                      required
-                      className="w-full"
                     />
+                    {errors.name && (
+                      <p className="text-sm text-red-500 mt-1">{errors.name.message}</p>
+                    )}
                   </div>
 
                   <div>
@@ -148,23 +215,87 @@ const Contact: React.FC = () => {
                       Email *
                     </label>
                     <Input
-                      id="email"
+                      {...register("email")}
+                      name="email"
                       type="email"
+                      autoComplete="email"
                       placeholder="your.email@example.com"
-                      required
-                      className="w-full"
                     />
+                    {errors.email && (
+                      <p className="text-sm text-red-500 mt-1">{errors.email.message}</p>
+                    )}
                   </div>
 
                   <div>
-                    <label htmlFor="company" className="block text-sm font-medium mb-2">
-                      Company
+                    <label htmlFor="phone" className="block text-sm font-medium mb-2">
+                      Phone Number *
                     </label>
                     <Input
-                      id="company"
-                      placeholder="Your company name"
-                      className="w-full"
+                      {...register("phone")}
+                      name="phone"
+                      type="tel"
+                      autoComplete="tel"
+                      placeholder="Your phone number"
                     />
+                    {errors.phone && (
+                      <p className="text-sm text-red-500 mt-1">{errors.phone.message}</p>
+                    )}
+                  </div>
+
+                  <div>
+                    <label htmlFor="projectType" className="block text-sm font-medium mb-2">
+                      Project Type *
+                    </label>
+                    <select
+                      {...register("projectType")}
+                      className="w-full rounded-md border bg-background px-3 py-2"
+                    >
+                      <option value="">Select project type</option>
+                      <option value="Website">Website</option>
+                      <option value="Web App">Web App</option>
+                      <option value="Branding">Branding</option>
+                      <option value="UI/UX">UI/UX Design</option>
+                      <option value="Other">Other</option>
+                    </select>
+                    {errors.projectType && (
+                      <p className="text-sm text-red-500 mt-1">{errors.projectType.message}</p>
+                    )}
+                  </div>
+
+                  <div>
+                    <label htmlFor="budget" className="block text-sm font-medium mb-2">
+                      Budget Range *
+                    </label>
+                    <select
+                      {...register("budget")}
+                      className="w-full rounded-md border bg-background px-3 py-2"
+                    >
+                      <option value="">Select budget range</option>
+                      <option value="25k-50k"> less than ₹25k</option>
+                      <option value="25k-50k">₹25k – ₹50k</option>
+                      <option value="50k-1L">₹50k – ₹1L</option>
+                      <option value="1L-3L">₹1L – ₹3L</option>
+                      <option value="3L+">₹3L+</option>
+                    </select>
+                    {errors.budget && (
+                      <p className="text-sm text-red-500 mt-1">{errors.budget.message}</p>
+                    )}
+                  </div>
+
+                  <div>
+                    <label htmlFor="timeline" className="block text-sm font-medium mb-2">
+                      Timeline
+                    </label>
+                    <select
+                      {...register("timeline")}
+                      className="w-full rounded-md border bg-background px-3 py-2"
+                    >
+                      <option value="">Select timeline</option>
+                      <option value="ASAP">ASAP</option>
+                      <option value="2-4 weeks">2–4 weeks</option>
+                      <option value="1-2 months">1–2 months</option>
+                      <option value="Flexible">Flexible</option>
+                    </select>
                   </div>
 
                   <div>
@@ -172,17 +303,27 @@ const Contact: React.FC = () => {
                       Project Details *
                     </label>
                     <Textarea
-                      id="project"
-                      placeholder="Tell us about your project, timeline, and budget..."
-                      required
+                      {...register("message")}
+                      name="message"
+                      autoComplete="off"
                       rows={6}
-                      className="w-full"
+                      placeholder="Tell us about your project..."
                     />
+                    {errors.message && (
+                      <p className="text-sm text-red-500 mt-1">{errors.message.message}</p>
+                    )}
                   </div>
 
-                  <Button type="submit" size="lg" className="w-full group">
-                    Send Message
-                    <Send className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  <Button
+                    type="submit"
+                    size="lg"
+                    className="w-full group"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? "Sending..." : "Send Message"}
+                    {!isSubmitting && (
+                      <Send className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                    )}
                   </Button>
                 </form>
               </Card>
@@ -201,12 +342,13 @@ const Contact: React.FC = () => {
           >
             <h2 className="text-4xl text-primary font-bold mb-6">Prefer to Schedule a Call?</h2>
             <p className="text-xl text-primary mb-8 opacity-90 max-w-2xl mx-auto">
-              Book a free 30-minute consultation to discuss your project
+              Email us to schedule a free 30-minute consultation about your project
             </p>
-            <a href="#" target="_blank" rel="noopener noreferrer">
-              <button className="px-8 py-4 bg-background text-foreground rounded-full border border-primary font-semibold hover:scale-105 transition-transform">
-                Schedule a Call
-              </button>
+            <a 
+              href={`mailto:${themeConfig.company.email}?subject=Schedule%20a%20Call%20with%20Nirmaan`}
+              className="inline-block px-8 py-4 bg-background text-foreground rounded-full border border-primary font-semibold hover:scale-105 transition-transform"
+            >
+              Email Us to Schedule a Call
             </a>
           </motion.div>
         </div>
