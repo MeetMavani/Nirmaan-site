@@ -15,6 +15,15 @@ const barlow = Barlow_Condensed({
 
 const projects = [
   {
+    name: 'Meloryn',
+    tagline: 'Handcrafted fine jewelry',
+    problem: 'The brand required a digital presence that could reflect the warmth, delicacy, and uniqueness of its handmade jewelry',
+    solution: 'Built an immersive, animation-driven experience that mirrors the delicacy of the craft itself',
+    result: 'Elevated brand perception and delivered a cohesive, high-end digital identity that resonates with its audience',
+    tech: 'Next · Framer Motion · Tailwind CSS',
+    image: "/sticky-cards/card_5.jpg"
+  },
+  {
     name: 'Shreya Motors App',
     tagline: 'Electric vehicle management platform',
     problem: 'Application required to manage electric vehicles and their rental assignments',
@@ -47,15 +56,6 @@ const projects = [
     solution: 'Built a modern, elegant and catchy homepage with smooth minimalist animations and pleasing UI',
     result: 'Improvement in establishing trust in students',
     image: "/sticky-cards/card_4.jpg"
-  },
-  {
-    name: 'Meloryn',
-    tagline: 'Handcrafted fine jewelry',
-    problem: 'The brand required a digital presence that could reflect the warmth, delicacy, and uniqueness of its handmade jewelry',
-    solution: 'Built an immersive, animation-driven experience that mirrors the delicacy of the craft itself',
-    result: 'Elevated brand perception and delivered a cohesive, high-end digital identity that resonates with its audience',
-    tech: 'Next · Framer Motion · Tailwind CSS',
-    image: "/sticky-cards/card_5.jpg"
   },
 ];
 

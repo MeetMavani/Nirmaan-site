@@ -85,7 +85,11 @@ const StickyCards = ({ projects }) => {
     }, []);
 
     return(
-        <div className="sticky-cards" ref={container}>
+        <div
+            className="sticky-cards"
+            ref={container}
+            style={{ "--cards-count": stickyCardsData.length }}
+        >
             {stickyCardsData.map((cardData, index) => {
                 return (
                     <div className="sticky-card" key={index}>

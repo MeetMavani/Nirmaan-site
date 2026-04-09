@@ -1,7 +1,7 @@
 .sticky-cards {
     position: relative;
     width: 100%;
-    height: 400vh; /* Ensure enough height for all cards to scroll */
+    height: calc(var(--cards-count, 4) * 100vh); /* Match scroll area to total cards */
     background: transparent;
 }
 
